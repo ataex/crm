@@ -9,7 +9,7 @@ Run npm install, it will install all dependencies for both backend and frontend.
 
 ## Backend
 Run npm start, start mongod (mongod --dbpath=/Users/[username]/mongo-data/).
-Navigate to `http://localhost:3000/` with Postman to view data sent by the API.
+Navigate to `http://localhost:3000/[definedRoute]` with Postman to view data sent by the API.
 Check database with Robomongo.
 
 ## Frontend
