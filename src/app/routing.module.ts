@@ -13,7 +13,7 @@ const routes: Routes = [
   { path : 'home', component : HomeComponent },
   { path : 'candidates', component : CandidateListComponent },
   { path : 'candidate/create', component : CandidateCreateComponent },
-  { path : 'candidate/update', component : CandidateUpdateComponent },
+  { path : 'candidate/update/:id', component : CandidateUpdateComponent },
   { path : 'jobs', component : JobComponent }
 ];
 

@@ -4,3 +4,5 @@
 
 
 <a [routerLink]="['/candidate/create']">Create candidate</a>
+
+<a *ngFor="let candidate of candidates" [routerLink]="['/candidate/update/', candidate.id]">Update candidate</a>

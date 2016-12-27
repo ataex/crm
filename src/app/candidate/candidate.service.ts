@@ -10,6 +10,10 @@ export class CandidateService {
 
   constructor(private http: Http) {}
 
+  getCandidate(id) {
+    return this.http.get(this.candidateUrl + '/' + id).map(this.extractData).catch(this.handleError);
+  }
+
   getCandidates() {
     return this.http.get(this.candidateUrl).map(this.extractData).catch(this.handleError);
   }
