@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {CandidateService} from "./candidate.service";
+import {CandidateService} from "./../candidate.service";
+
 
 @Component({
-  selector: 'app-candidate',
-  templateUrl: './candidate.component.html',
-  styleUrls: ['./candidate.component.scss'],
+  selector: 'app-candidate-list',
+  templateUrl: './candidate-list.component.html',
+  styleUrls: ['./candidate-list.component.scss'],
   providers : [CandidateService]
 })
-export class CandidateComponent implements OnInit {
+export class CandidateListComponent implements OnInit {
 
   private candidates = [];
 
