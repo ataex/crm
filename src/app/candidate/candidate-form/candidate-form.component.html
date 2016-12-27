@@ -1,3 +1,10 @@
-<p>
-  candidate-form works!
-</p>
+<form [formGroup]="candidateForm">
+    <label>Firstname:</label>
+    <input type="text" formControlName="firstname">
+
+    <label>Lastname:</label>
+    <input type="text" formControlName="lastname">
+
+
+    <button type="submit">Submit</button>
+</form>

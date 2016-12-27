@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-candidate-form',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CandidateFormComponent implements OnInit {
 
-  constructor() { }
+  candidateForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.candidateForm = this.formBuilder.group({
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required]
+    });
   }
 
 }

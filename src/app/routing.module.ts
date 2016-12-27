@@ -14,7 +14,6 @@ const routes: Routes = [
   { path : 'candidates', component : CandidateListComponent },
   { path : 'candidate/create', component : CandidateCreateComponent },
   { path : 'candidate/update', component : CandidateUpdateComponent },
-  { path : 'candidates', component : CandidateListComponent },
   { path : 'jobs', component : JobComponent }
 ];
 
