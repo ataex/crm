@@ -9,6 +9,7 @@ let mongoose = require('./config/mongoose');
 // Routes
 let candidate   = require('./routes/candidate');
 let app         = express();
+let cors        = require('cors');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,6 +29,7 @@ app.use(require('node-sass-middleware')({
 }));
 app.use(express.static(path.join(__dirname, 'dist')));
 
+app.use(cors());
 app.use('/candidate', candidate);
 
 // catch 404 and forward to error handler

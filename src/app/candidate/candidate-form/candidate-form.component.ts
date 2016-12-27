@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -12,11 +12,19 @@ export class CandidateFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) { }
 
+  @Input() candidate: any = {};
+
   ngOnInit() {
     this.candidateForm = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required]
     });
+
+    if(this.candidate) this.candidateForm.patchValue(this.candidate);
+  }
+
+  onSubmit() {
+    console.log(this.candidateForm.value);
   }
 
 }
