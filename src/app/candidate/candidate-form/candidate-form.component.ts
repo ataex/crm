@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-candidate-form',
@@ -9,22 +10,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CandidateFormComponent implements OnInit {
 
   candidateForm: FormGroup;
-
-  constructor(private formBuilder: FormBuilder) { }
-
   @Input() candidate: any = {};
+
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.candidateForm = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required]
     });
-
-    if(this.candidate) this.candidateForm.patchValue(this.candidate);
   }
 
-  onSubmit() {
-    console.log(this.candidateForm.value);
-  }
+  ngOnChanges(changes) {
+    let candidate = changes.candidate.currentValue;
 
+    if(!_.isEmpty(candidate)) {
+      this.candidateForm.patchValue(candidate);
+    }
+  }
 }

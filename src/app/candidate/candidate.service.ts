@@ -32,8 +32,9 @@ export class CandidateService {
 
   private extractData(res: Response) {
     let body = res.json();
-    return body.data || { };
+    return body || {};
   }
+
   private handleError (error: Response | any) {
     // In a real world app, we might use a remote logging infrastructure
     let errMsg: string;

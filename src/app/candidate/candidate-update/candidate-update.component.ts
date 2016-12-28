@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CandidateService } from "../candidate.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-candidate-update',
@@ -9,28 +10,14 @@ import { CandidateService } from "../candidate.service";
 })
 export class CandidateUpdateComponent implements OnInit {
 
-  candidate: any = {};
+  private candidate: any = {};
 
-  constructor(private candidateService: CandidateService) { }
+  constructor(private candidateService: CandidateService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    let candidateId = '5859b8fa42cf1a54e7775782';
-    this.candidateService.getCandidate(candidateId).subscribe((candidate) => this.candidate = candidate);
-
-    console.log(this.candidate);
+    this.activatedRoute.params.subscribe((params) => {
+      this.candidateService.getCandidate(params['id']).subscribe((candidate) => this.candidate = candidate );
+    });
   }
-  //   this.candidate = {
-  //     "_id":"5859b8fa42cf1a54e7775782",
-  //     "firstname":"Thomas",
-  //     "lastname":"Bousquet",
-  //     "email":"thomas.bousquet@gmail.com",
-  //     "__v":0,
-  //     "updatedAt":"2016-12-20T23:04:17.422Z",
-  //     "availableUntil":null,
-  //     "availableFrom":null,
-  //     "phone":5146258499,
-  //     "birthdate":"1984-02-02T00:00:00.000Z"
-  //   };
-  // }
 
 }

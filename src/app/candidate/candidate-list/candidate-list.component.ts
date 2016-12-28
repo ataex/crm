@@ -15,13 +15,10 @@ export class CandidateListComponent implements OnInit {
   constructor(private candidateService: CandidateService) { }
 
   ngOnInit() {
-    this.getCandidates();
-  }
-
-  getCandidates() {
     this.candidateService.getCandidates().subscribe(
-      (candidates) => this.candidates = candidates
+      (candidates) => candidates ? this.candidates = candidates : []
     );
   }
+
 
 }
