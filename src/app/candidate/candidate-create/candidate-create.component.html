@@ -1,2 +1,2 @@
 <a [routerLink]="['/candidates']">Back to candidates list</a>
-<app-candidate-form></app-candidate-form>
+<app-candidate-form (onSubmitted)="onSubmitted($event)"></app-candidate-form>

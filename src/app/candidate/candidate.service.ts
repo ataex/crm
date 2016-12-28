@@ -23,7 +23,7 @@ export class CandidateService {
   }
 
   updateCandidate(id, candidate) {
-    return this.http.put(this.candidateUrl + '/' + id, candidate).map(this.extractData).catch(this.handleError);
+    return this.http.patch(this.candidateUrl + '/' + id, candidate).map(this.extractData).catch(this.handleError);
   }
 
   deleteCandidate(id) {

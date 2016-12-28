@@ -11,12 +11,20 @@ import {ActivatedRoute} from "@angular/router";
 export class CandidateUpdateComponent implements OnInit {
 
   private candidate: any = {};
+  private candidateId: String;
 
   constructor(private candidateService: CandidateService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
-      this.candidateService.getCandidate(params['id']).subscribe((candidate) => this.candidate = candidate );
+      this.candidateId = params['id'];
+      this.candidateService.getCandidate(this.candidateId).subscribe((candidate) => this.candidate = candidate );
+    });
+  }
+
+  onSubmitted(candidate) {
+    this.candidateService.updateCandidate(this.candidateId, candidate).subscribe((candidate) => {
+      console.log(candidate);
     });
   }
 
