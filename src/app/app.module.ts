@@ -1,13 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { RoutingModule } from './routing.module';
-import { JobComponent } from './job/job.component';
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 import { CandidateListComponent } from './candidate/candidate-list/candidate-list.component';
@@ -20,7 +19,6 @@ import { CandidateFormComponent } from './candidate/candidate-form/candidate-for
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    JobComponent,
     CandidateListComponent,
     CandidateCreateComponent,
     CandidateUpdateComponent,
@@ -28,7 +26,6 @@ import { CandidateFormComponent } from './candidate/candidate-form/candidate-for
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     ReactiveFormsModule,
     HttpModule,
     RoutingModule,
