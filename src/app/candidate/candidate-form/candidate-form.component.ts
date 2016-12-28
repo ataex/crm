@@ -18,7 +18,8 @@ export class CandidateFormComponent implements OnInit {
   ngOnInit() {
     this.candidateForm = this.formBuilder.group({
       firstname: ['', Validators.required],
-      lastname: ['', Validators.required]
+      lastname: ['', Validators.required],
+      email: ['', Validators.required]
     });
   }
 

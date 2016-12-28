@@ -1,8 +1,5 @@
-<p>
-  candidate-list works!
-</p>
-
-
 <a [routerLink]="['/candidate/create']">Create candidate</a>
 
-<a *ngFor="let candidate of candidates" [routerLink]="['/candidate/update/', candidate._id]">Update candidate</a>
+<div *ngFor="let candidate of candidates">
+    {{ candidate._id }} {{ candidate.firstname }} {{ candidate.lastname }} <a [routerLink]="['/candidate/update/', candidate._id]">Update candidate</a>
+</div>
