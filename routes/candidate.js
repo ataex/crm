@@ -6,21 +6,15 @@ let _                       = require('lodash');
 
 // Get all candidates
 router.get('/', (req, res, next)    => {
-    Candidate.find().then(
-        (candidates) => { res.send(candidates) },
-        (e) => { res.status(400).send(e); }
-    )
+    Candidate.find().then((candidates) => res.send(candidates)).catch((e) => res.status(400).send(e))
 });
 
 // Get candidate
 router.get('/:id', (req, res, next) => {
     let id = req.params.id;
-    if(!ObjectID.isValid(id)) res.status(404).send();
+    if(!ObjectID.isValid(id)) res.status(400).send();
 
-    Candidate.findById(id).then((candidate) => {
-        if(!candidate) res.status(404).send();
-        res.send(candidate);
-    }).catch((e) => res.status(400).send());
+    Candidate.findById(id).then((candidate) => res.send(candidate)).catch((e) => res.status(400).send(e));
 });
 
 // Create candidate
@@ -28,38 +22,27 @@ router.post('/', (req, res, next) => {
 
     let candidate = new Candidate(req.body);
 
-    candidate.save().then(
-        (doc) => res.send(doc),
-        (error) => res.status(400).send(error)
-    );
+    candidate.save().then((doc) => res.send(doc)).catch((e) => res.status(400).send(e));
 });
 
 // Update candidate
 router.patch('/:id', (req, res, next) => {
 
     let id      = req.params.id;
-    let body    = _.pick(req.body, ['firstname', 'lastname', 'email', 'birthdate', 'phone', 'availableFrom', 'availableUntil']);
+    let body    = _.pick(req.body, ['firstname', 'lastname', 'email', 'birthdate', 'phone', 'availableAt', 'availableUntil']);
 
-    if(!ObjectID.isValid(id)) res.status(404).send();
+    if(!ObjectID.isValid(id)) res.status(400).send();
 
-    Candidate.findByIdAndUpdate(id, { $set : body }, { new : true }).then((candidate) => {
-        if(!candidate) res.status(404).send();
-        res.send(candidate)
-    });
-
-    Candidate.findOneAndUpdate();
+    Candidate.findByIdAndUpdate(id, { $set : body }, { new : true }).then((candidate) => res.send(candidate)).catch((e) => res.status(400).send(e));
 });
 
 // Delete candidate
 router.delete('/:id', (req, res, next) => {
 
     let id = req.params.id;
-    if(!ObjectID.isValid(id)) res.status(404).send();
+    if(!ObjectID.isValid(id)) res.status(400).send();
 
-    Candidate.findByIdAndRemove(id).then((candidate) => {
-        if(!candidate) res.status(404).send();
-        res.send(candidate);
-    }).catch((e) => res.status(400).send());
+    Candidate.findByIdAndRemove(id).then((candidate) => res.send(candidate)).catch((e) => res.status(400).send());
 });
 
 module.exports = router;
