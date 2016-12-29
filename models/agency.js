@@ -9,7 +9,8 @@ let Agency = mongoose.model('Agency', {
     },
     _account : {
         type : mongoose.Schema.ObjectId,
-        ref :  'Account'
+        ref :  'Account',
+        required : true
     },
     updatedAt : {
         type : Date,

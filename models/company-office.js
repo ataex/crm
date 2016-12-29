@@ -20,7 +20,8 @@ let CompanyOffice = mongoose.model('CompanyOffice', {
     },
     _office : {
         type : mongoose.Schema.ObjectId,
-        ref : 'Company'
+        ref : 'Company',
+        required : true
     },
     updatedAt : {
         type : Date,

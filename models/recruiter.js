@@ -25,7 +25,12 @@ let Recruiter = mongoose.model('Recruiter', {
         type : Boolean,
         default : false
     },
-    agency : {
+    _account : {
+        type: mongoose.Schema.ObjectId,
+        ref : 'Company',
+        required : true
+    },
+    _agency : {
         type : mongoose.Schema.ObjectId,
         ref : 'Agency'
     },

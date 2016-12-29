@@ -2,9 +2,14 @@ const mongoose  = require('mongoose');
 
 let Job = mongoose.model('Job', {
 
-    company : {
+    _company : {
         type: mongoose.Schema.ObjectId,
         ref : 'Company',
+        required : true
+    },
+    _account : {
+        type: mongoose.Schema.ObjectId,
+        ref : 'Account',
         required : true
     },
     agency : {

@@ -1,22 +1,25 @@
 const mongoose = require('mongoose');
 
-let Appointment = mongoose.model('Appointment', {
+let CandidateContact = mongoose.model('CandidateContact', {
 
     _recruiter : {
         type: mongoose.Schema.ObjectId,
-        ref : 'Recruiter'
+        ref : 'Recruiter',
+        required : true
     },
     _candidate : {
         type: mongoose.Schema.ObjectId,
-        ref : 'Candidate'
+        ref : 'Candidate',
+        required : true
+    },
+    _type : {
+        type: mongoose.Schema.ObjectId,
+        ref : 'ContactType'
     },
     name : {
         type : String
     },
-    agenda : {
-        type : String
-    },
-    recap : {
+    note : {
         type : String
     },
     at : {
@@ -41,4 +44,4 @@ let Appointment = mongoose.model('Appointment', {
     }
 });
 
-module.exports = Appointment;
+module.exports = CandidateContact;

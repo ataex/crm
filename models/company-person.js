@@ -1,6 +1,6 @@
 const mongoose  = require('mongoose');
 
-let Company = mongoose.model('Company', {
+let CompanyPerson = mongoose.model('CompanyPerson', {
 
     firstname : {
         type: String,
@@ -12,28 +12,16 @@ let Company = mongoose.model('Company', {
         required : true,
         trim : true
     },
-    birthdate : {
-        type : Date,
+    email : {
+        type: String,
         required : true
     },
-    email : {
-        type : String,
-        required : true,
-        trim : true
-    },
     phone : {
-        type : Number,
-        trim : true
+        type : Number
     },
-    availableFrom : {
-        type : Date
-    },
-    availableUntil : {
-        type : Date
-    },
-    _account : {
+    _company : {
         type : mongoose.Schema.ObjectId,
-        ref :  'Account',
+        ref : 'Company',
         required : true
     },
     updatedAt : {
@@ -46,4 +34,4 @@ let Company = mongoose.model('Company', {
     }
 });
 
-module.exports = Candidate;
+module.exports = CompanyPerson;

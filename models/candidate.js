@@ -26,13 +26,18 @@ let Candidate = mongoose.model('Candidate', {
         trim : true,
         default : null
     },
-    availableFrom : {
+    availableAt : {
         type : Date,
         default : null
     },
     availableUntil : {
         type : Date,
         default : null
+    },
+    _account : {
+        type : mongoose.Schema.ObjectId,
+        ref :  'Account',
+        required : true
     },
     updatedAt : {
         type : Date,
@@ -42,10 +47,6 @@ let Candidate = mongoose.model('Candidate', {
         type : Date,
         default : null
     },
-    _account : {
-        type : mongoose.Schema.ObjectId,
-        ref :  'Account'
-    }
 });
 
 module.exports = Candidate;
