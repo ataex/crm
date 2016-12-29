@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose  = require('mongoose');
 
 let Agency = mongoose.model('Agency', {
 
@@ -6,6 +6,10 @@ let Agency = mongoose.model('Agency', {
         type: String,
         required : true,
         trim : true
+    },
+    _account : {
+        type : mongoose.Schema.ObjectId,
+        ref :  'Account'
     },
     updatedAt : {
         type : Date,

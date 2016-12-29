@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose  = require('mongoose');
 
 let Candidate = mongoose.model('Candidate', {
 
@@ -37,6 +37,10 @@ let Candidate = mongoose.model('Candidate', {
     updatedAt : {
         type : Date,
         default : Date.now()
+    },
+    _account : {
+        type : mongoose.Schema.ObjectId,
+        ref :  'Account'
     }
 });
 

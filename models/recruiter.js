@@ -26,7 +26,8 @@ let Recruiter = mongoose.model('Recruiter', {
         default : false
     },
     agency : {
-
+        type : mongoose.Schema.ObjectId,
+        ref : 'Agency'
     },
     updatedAt : {
         type : Date,

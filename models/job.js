@@ -1,17 +1,17 @@
-const mongoose = require('mongoose');
+const mongoose  = require('mongoose');
 
 let Job = mongoose.model('Job', {
 
-    sex : {
-        type : Boolean,
-        required : true,
+    company : {
+        type: mongoose.Schema.ObjectId,
+        ref : 'Company',
+        required : true
     },
-    firstname : {
-        type: String,
-        required : true,
-        trim : true
+    agency : {
+        type : mongoose.Schema.ObjectId,
+        ref : 'Agency'
     },
-    lastname : {
+    title : {
         type: String,
         required : true,
         trim : true
@@ -19,9 +19,6 @@ let Job = mongoose.model('Job', {
     active : {
         type : Boolean,
         default : false
-    },
-    agency : {
-
     },
     updatedAt : {
         type : Date,

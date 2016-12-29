@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose  = require('mongoose');
 
 let CompanyOffice = mongoose.model('CompanyOffice', {
 
@@ -18,10 +18,9 @@ let CompanyOffice = mongoose.model('CompanyOffice', {
     phone : {
         type : Number
     },
-    // AddressObject
-    address : {
-        type : Number,
-        trim : true
+    _office : {
+        type : mongoose.Schema.ObjectId,
+        ref : 'Company'
     },
     updatedAt : {
         type : Date,

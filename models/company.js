@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose  = require('mongoose');
 
 let Company = mongoose.model('Company', {
 
@@ -31,10 +31,14 @@ let Company = mongoose.model('Company', {
     availableUntil : {
         type : Date
     },
+    _account : {
+        type : mongoose.Schema.ObjectId,
+        ref :  'Account'
+    },
     updatedAt : {
         type : Date,
         default : Date.now()
-    }
+    },
 });
 
 module.exports = Candidate;
