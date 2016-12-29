@@ -1,15 +1,16 @@
 const mongoose  = require('mongoose');
 
-let Agency = mongoose.model('Agency', {
+let IndustryTemplate = mongoose.model('IndustryTemplate', {
 
-    name : {
+    slug : {
         type: String,
         required : true,
         trim : true
     },
-    _account : {
-        type : mongoose.Schema.ObjectId,
-        ref :  'Account'
+    name : {
+        type: String,
+        required : true,
+        trim : true
     },
     updatedAt : {
         type : Date,
@@ -21,4 +22,4 @@ let Agency = mongoose.model('Agency', {
     }
 });
 
-module.exports = Agency;
+module.exports = IndustryTemplate;

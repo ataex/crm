@@ -16,13 +16,28 @@ let Job = mongoose.model('Job', {
         required : true,
         trim : true
     },
+    summary : {
+        type : String
+    },
+    content : {
+        type : String,
+        required : true
+    },
     active : {
         type : Boolean,
         default : false
     },
+    publishedAt : {
+        type : Date,
+        default : Date.now()
+    },
     updatedAt : {
         type : Date,
         default : Date.now()
+    },
+    deletedAt : {
+        type : Date,
+        default : null
     }
 });
 

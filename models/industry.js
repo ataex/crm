@@ -1,6 +1,6 @@
 const mongoose  = require('mongoose');
 
-let Agency = mongoose.model('Agency', {
+let Industry = mongoose.model('Industry', {
 
     name : {
         type: String,
@@ -21,4 +21,4 @@ let Agency = mongoose.model('Agency', {
     }
 });
 
-module.exports = Agency;
+module.exports = Industry;

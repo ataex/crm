@@ -38,6 +38,10 @@ let Candidate = mongoose.model('Candidate', {
         type : Date,
         default : Date.now()
     },
+    deletedAt : {
+        type : Date,
+        default : null
+    },
     _account : {
         type : mongoose.Schema.ObjectId,
         ref :  'Account'

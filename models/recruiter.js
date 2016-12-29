@@ -32,6 +32,10 @@ let Recruiter = mongoose.model('Recruiter', {
     updatedAt : {
         type : Date,
         default : Date.now()
+    },
+    deletedAt : {
+        type : Date,
+        default : null
     }
 });
 
