@@ -10,6 +10,15 @@ let Appointment = mongoose.model('Appointment', {
         type: mongoose.Schema.ObjectId,
         ref : 'Candidate'
     },
+    name : {
+        type : String
+    },
+    agenda : {
+        type : String
+    },
+    recap : {
+        type : String
+    },
     at : {
         type : Date,
         required : true
