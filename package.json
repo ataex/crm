@@ -30,6 +30,7 @@
     "express": "~4.14.0",
     "hammerjs": "2.0.8",
     "hbs": "~4.0.1",
+    "jsonwebtoken": "7.2.1",
     "lodash": "4.17.2",
     "mongodb": "https://registry.npmjs.org/mongodb/-/mongodb-2.2.16.tgz",
     "mongoose": "4.7.3",

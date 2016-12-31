@@ -3,6 +3,7 @@ let router                  = express.Router();
 let Candidate               = require('./../models/candidate');
 let { ObjectID }            = require('mongodb');
 let _                       = require('lodash');
+let accountId = '586590668201eee091f23008';
 
 // Get all candidates
 router.get('/', (req, res, next)    => {
@@ -21,6 +22,7 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
 
     let candidate = new Candidate(req.body);
+    candidate._account = accountId;
 
     candidate.save().then((doc) => res.send(doc)).catch((e) => res.status(400).send(e));
 });

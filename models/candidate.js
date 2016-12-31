@@ -1,6 +1,7 @@
 const mongoose  = require('mongoose');
+const Schema    = mongoose.Schema;
 
-let Candidate = mongoose.model('Candidate', {
+candidateSchema = new Schema({
 
     firstname : {
         type: String,
@@ -26,16 +27,8 @@ let Candidate = mongoose.model('Candidate', {
         trim : true,
         default : null
     },
-    availableAt : {
-        type : Date,
-        default : null
-    },
-    availableUntil : {
-        type : Date,
-        default : null
-    },
     _account : {
-        type : mongoose.Schema.ObjectId,
+        type : Schema.ObjectId,
         ref :  'Account',
         required : true
     },
@@ -46,7 +39,18 @@ let Candidate = mongoose.model('Candidate', {
     deletedAt : {
         type : Date,
         default : null
-    },
+    }
 });
+
+candidateSchema.methods.isAvailable = function() {
+    let isAvailable = false;
+
+    if((this.availableAt && this.availableAt < Date.now())){
+
+    }
+    return  isAvailable;
+};
+
+let Candidate = mongoose.model('Candidate', candidateSchema);
 
 module.exports = Candidate;

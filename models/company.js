@@ -46,4 +46,4 @@ let Company = mongoose.model('Company', {
     }
 });
 
-module.exports = Candidate;
+module.exports = Company;

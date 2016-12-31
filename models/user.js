@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-let Recruiter = mongoose.model('Recruiter', {
+let User = mongoose.model('User', {
 
     firstname : {
         type: String,
@@ -20,6 +20,9 @@ let Recruiter = mongoose.model('Recruiter', {
     password : {
         type : String,
         required : true
+    },
+    roles : {
+        type : Array
     },
     active : {
         type : Boolean,
@@ -44,4 +47,4 @@ let Recruiter = mongoose.model('Recruiter', {
     }
 });
 
-module.exports = Recruiter;
+module.exports = User;
