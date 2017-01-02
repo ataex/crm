@@ -1,7 +1,7 @@
 const mongoose  = require('mongoose');
 const Schema    = mongoose.Schema;
 
-let User = mongoose.model('User', {
+let userSchema = {
 
     firstname : {
         type: String,
@@ -42,14 +42,14 @@ let User = mongoose.model('User', {
         type : Schema.ObjectId,
         ref : 'UserType'
     },
-    updatedAt : {
-        type : Date,
-        default : Date.now()
-    },
     deletedAt : {
         type : Date,
         default : null
     }
-});
+};
+
+userSchema.plugin(require('./../plugins/updated-at'));
+
+let User = mongoose.model('User', userSchema);
 
 module.exports = User;
