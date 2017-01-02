@@ -13,6 +13,8 @@ import { CandidateListComponent } from './candidate/candidate-list/candidate-lis
 import { CandidateCreateComponent } from './candidate/candidate-create/candidate-create.component';
 import { CandidateUpdateComponent } from './candidate/candidate-update/candidate-update.component';
 import { CandidateFormComponent } from './candidate/candidate-form/candidate-form.component';
+import { RegisterComponent } from './register/register.component';
+import { ActivateComponent } from './activate/activate.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { CandidateFormComponent } from './candidate/candidate-form/candidate-for
     CandidateListComponent,
     CandidateCreateComponent,
     CandidateUpdateComponent,
-    CandidateFormComponent
+    CandidateFormComponent,
+    RegisterComponent,
+    ActivateComponent
   ],
   imports: [
     BrowserModule,

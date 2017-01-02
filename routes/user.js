@@ -48,7 +48,7 @@ router.delete('/:id', (req, res, next) => {
 });
 
 // Register user
-router.post('/sign-up', (req, res, next) => {
+router.post('/register', (req, res, next) => {
 
     let user        = new User(req.body);
     user._account   = accountId;
@@ -57,7 +57,7 @@ router.post('/sign-up', (req, res, next) => {
 });
 
 // Authenticate user
-router.post('/sign-in', (req, res, next) => {
+router.post('/authenticate', (req, res, next) => {
 
     let user        = new User(req.body);
     user._account   = accountId;

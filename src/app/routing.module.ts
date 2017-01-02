@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { CandidateListComponent } from "./candidate/candidate-list/candidate-list.component";
 import { CandidateCreateComponent } from "./candidate/candidate-create/candidate-create.component";
 import { CandidateUpdateComponent } from "./candidate/candidate-update/candidate-update.component";
+import {RegisterComponent} from "./register/register.component";
 
 
 const routes: Routes = [
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path : 'home', component : HomeComponent },
   { path : 'candidates', component : CandidateListComponent },
   { path : 'candidate/create', component : CandidateCreateComponent },
-  { path : 'candidate/update/:id', component : CandidateUpdateComponent }
+  { path : 'candidate/update/:id', component : CandidateUpdateComponent },
+  { path : 'register', component : RegisterComponent }
 ];
 
 @NgModule({
