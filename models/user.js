@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+const mongoose  = require('mongoose');
+const Schema    = mongoose.Schema;
 
 let User = mongoose.model('User', {
 
@@ -29,13 +30,17 @@ let User = mongoose.model('User', {
         default : false
     },
     _account : {
-        type: mongoose.Schema.ObjectId,
+        type: Schema.ObjectId,
         ref : 'Company',
         required : true
     },
     _agency : {
-        type : mongoose.Schema.ObjectId,
+        type : Schema.ObjectId,
         ref : 'Agency'
+    },
+    _type : {
+        type : Schema.ObjectId,
+        ref : 'UserType'
     },
     updatedAt : {
         type : Date,
