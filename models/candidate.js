@@ -42,15 +42,6 @@ candidateSchema = new Schema({
     }
 });
 
-candidateSchema.methods.isAvailable = function() {
-    let isAvailable = false;
-
-    if((this.availableAt && this.availableAt < Date.now())){
-
-    }
-    return  isAvailable;
-};
-
 let Candidate = mongoose.model('Candidate', candidateSchema);
 
 module.exports = Candidate;
