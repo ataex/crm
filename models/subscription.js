@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose  = require('mongoose');
+const Schema    = mongoose.Schema;
 
-let Subscription = mongoose.model('Subscription', {
+let subscriptionSchema = new Schema({
 
-    total : {
+    subtotal : {
         type: String,
         required : true,
         trim : true
@@ -11,6 +12,9 @@ let Subscription = mongoose.model('Subscription', {
         type : String
     },
     stripe : {
+        type : String
+    },
+    token : {
         type : String
     },
     cancelledAt : {
@@ -25,14 +29,13 @@ let Subscription = mongoose.model('Subscription', {
         type : Date,
         default : null
     },
-    updatedAt : {
-        type : Date,
-        default : Date.now()
-    },
     deletedAt : {
         type : Date,
         default : null
     }
 });
+
+subscriptionSchema.plugin(require('./../plugins/updated-at'));
+let Subscription = mongoose.model('Subscription', subscriptionSchema);
 
 module.exports = Subscription;

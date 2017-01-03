@@ -8,6 +8,8 @@ let mongoose = require('./config/mongoose');
 
 // Routes
 let candidate   = require('./routes/candidate');
+let user        = require('./routes/user');
+let account     = require('./routes/account');
 let app         = express();
 
 // view engine setup
@@ -34,7 +36,10 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, PATCH");
     next();
 });
-app.use('/candidate', candidate);
+app.use('api/account', account);
+app.use('api/user', user);
+app.use('api/candidate', candidate);
+app.use('api/user', candidate);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => res.sendFile(__dirname+'/dist/index.html'));

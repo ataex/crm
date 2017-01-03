@@ -1,7 +1,7 @@
 const mongoose  = require('mongoose');
 const Schema    = mongoose.Schema;
 
-let userSchema = {
+let userSchema = new Schema ({
 
     firstname : {
         type: String,
@@ -46,7 +46,7 @@ let userSchema = {
         type : Date,
         default : null
     }
-};
+});
 
 userSchema.plugin(require('./../plugins/updated-at'));
 

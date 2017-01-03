@@ -47,15 +47,6 @@ router.delete('/:id', (req, res, next) => {
     User.findByIdAndRemove(id).then((user) => res.send(user)).catch((e) => res.status(400).send());
 });
 
-// Register user
-router.post('/register', (req, res, next) => {
-
-    let user        = new User(req.body);
-    user._account   = accountId;
-
-    user.save().then((doc) => res.send(doc)).catch((e) => res.status(400).send(e));
-});
-
 // Authenticate user
 router.post('/authenticate', (req, res, next) => {
 

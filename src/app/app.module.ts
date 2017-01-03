@@ -15,6 +15,7 @@ import { CandidateUpdateComponent } from './candidate/candidate-update/candidate
 import { CandidateFormComponent } from './candidate/candidate-form/candidate-form.component';
 import { RegisterComponent } from './register/register.component';
 import { ActivateComponent } from './activate/activate.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ActivateComponent } from './activate/activate.component';
     CandidateUpdateComponent,
     CandidateFormComponent,
     RegisterComponent,
-    ActivateComponent
+    ActivateComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
