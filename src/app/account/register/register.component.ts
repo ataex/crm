@@ -2,28 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
 
-    registerForm: FormGroup
+    registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+    constructor(private formBuilder: FormBuilder) { }
 
-  ngOnInit() {
+    ngOnInit() {
 
         this.registerForm = this.formBuilder.group({
             firstname: ['', Validators.required],
             lastname: ['', Validators.required],
             email: ['', Validators.required]
         });
+    }
 
-  }
-
-  onSubmit() {
-        console.log(this.registerForm.value);
-  }
+    onSubmit() {
+        console.log('llll');
+    }
 
 }

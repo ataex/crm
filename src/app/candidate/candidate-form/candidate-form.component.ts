@@ -15,23 +15,23 @@ export class CandidateFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) {}
 
-  ngOnInit() {
-    this.candidateForm = this.formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', Validators.required]
-    });
-  }
-
-  ngOnChanges(changes) {
-    let candidate = changes.candidate.currentValue;
-
-    if(!_.isEmpty(candidate)) {
-      this.candidateForm.patchValue(candidate);
+    ngOnInit() {
+        this.candidateForm = this.formBuilder.group({
+            firstname: ['', Validators.required],
+            lastname: ['', Validators.required],
+            email: ['', Validators.required]
+        });
     }
-  }
 
-  onSubmit() {
-    this.onSubmitted.emit(this.candidateForm.value);
-  }
+    ngOnChanges(changes) {
+        let candidate = changes.candidate.currentValue;
+
+        if(!_.isEmpty(candidate)) {
+            this.candidateForm.patchValue(candidate);
+        }
+    }
+
+    onSubmit() {
+        this.onSubmitted.emit(this.candidateForm.value);
+    }
 }
