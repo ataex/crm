@@ -4,9 +4,10 @@ const Schema    = mongoose.Schema;
 let subscriptionSchema = new Schema({
 
     subtotal : {
-        type: String,
+        type: Number,
         required : true,
-        trim : true
+        trim : true,
+        default : 0
     },
     currency : {
         type : String

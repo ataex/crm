@@ -5,12 +5,10 @@ let userSchema = new Schema ({
 
     firstname : {
         type: String,
-        required : true,
         trim : true
     },
     lastname : {
         type: String,
-        required : true,
         trim : true
     },
     email : {

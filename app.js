@@ -36,10 +36,10 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, PATCH");
     next();
 });
-app.use('api/account', account);
-app.use('api/user', user);
-app.use('api/candidate', candidate);
-app.use('api/user', candidate);
+app.use('/api/account', account);
+app.use('/api/user', user);
+app.use('/api/candidate', candidate);
+app.use('/api/user', candidate);
 
 // catch 404 and send frontend app
 app.use((req, res, next) => {
