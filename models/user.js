@@ -39,7 +39,7 @@ let userSchema = new Schema ({
         ref : 'Agency'
     },
     _type : {
-        type : Schema.ObjectId,
+        type : String,
         ref : 'UserType'
     },
     deletedAt : {

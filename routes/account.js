@@ -15,6 +15,7 @@ router.post('/register', (req, res, next) => {
     let account         = new Account(req.body);
     let accountSaved;
     let subscriptionSaved;
+
     account.save().then((account) => {
         // Create subscription
         let token           = bcrypt.genSaltSync(10);
@@ -27,10 +28,10 @@ router.post('/register', (req, res, next) => {
     .then((subscription) => {
         subscriptionSaved = subscription;
         // Create amin user
-        let user = new User({ type : 'admin', _account : accountSaved._id, email : req.body.email, password : req.body.password });
+        let user = new User({ type : 'admin', _account : accountSaved._id, email : req.body.email, password : req.body.password,  });
 
         return user.save();
-    })``
+    })
     .then((user) => {
         // Send email
         res.render('activate', { account : accountSaved, subscription : subscriptionSaved }, (error, html) => {

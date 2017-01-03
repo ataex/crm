@@ -6,7 +6,7 @@ import { environment } from './../../environments/environment';
 @Injectable()
 export class CandidateService {
 
-  private candidateUrl = environment.baseUrl + 'candidate';
+  private candidateUrl = environment.baseUrl + 'api/candidate';
 
   constructor(private http: Http) {}
 
@@ -31,8 +31,7 @@ export class CandidateService {
   }
 
   private extractData(res: Response) {
-    let body = res.json();
-    return body || {};
+    return res.json();
   }
 
   private handleError (error: Response | any) {

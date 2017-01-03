@@ -3,17 +3,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-candidate-form',
-  templateUrl: './candidate-form.component.html',
-  styleUrls: ['./candidate-form.component.scss']
+    selector: 'app-candidate-form',
+    templateUrl: './candidate-form.component.html',
+    styleUrls: ['./candidate-form.component.scss']
 })
 export class CandidateFormComponent implements OnInit {
 
-  candidateForm: FormGroup;
-  @Input() candidate: any = {};
-  @Output() onSubmitted = new EventEmitter();
+    candidateForm: FormGroup;
+    @Input() candidate: any = {};
+    @Output() onSubmitted = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder) {}
+    constructor(private formBuilder: FormBuilder) {}
 
     ngOnInit() {
         this.candidateForm = this.formBuilder.group({
@@ -23,13 +23,13 @@ export class CandidateFormComponent implements OnInit {
         });
     }
 
-    ngOnChanges(changes) {
-        let candidate = changes.candidate.currentValue;
+        ngOnChanges(changes) {
+            let candidate = changes.candidate.currentValue;
 
-        if(!_.isEmpty(candidate)) {
-            this.candidateForm.patchValue(candidate);
+            if(!_.isEmpty(candidate)) {
+                this.candidateForm.patchValue(candidate);
+            }
         }
-    }
 
     onSubmit() {
         this.onSubmitted.emit(this.candidateForm.value);
