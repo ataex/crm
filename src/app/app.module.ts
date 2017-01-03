@@ -13,8 +13,8 @@ import { CandidateListComponent } from './candidate/candidate-list/candidate-lis
 import { CandidateCreateComponent } from './candidate/candidate-create/candidate-create.component';
 import { CandidateUpdateComponent } from './candidate/candidate-update/candidate-update.component';
 import { CandidateFormComponent } from './candidate/candidate-form/candidate-form.component';
-import { RegisterComponent } from './register/register.component';
-import { ActivateComponent } from './activate/activate.component';
+import { RegisterComponent } from './account/register/register.component';
+import { ActivateComponent } from './account/activate/activate.component';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({

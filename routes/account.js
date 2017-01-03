@@ -14,6 +14,7 @@ router.post('/register', (req, res, next) => {
     // Create account
     let account         = new Account(req.body);
     let accountSaved;
+    let subscriptionSaved;
     account.save().then((account) => {
         // Create subscription
         let token           = bcrypt.genSaltSync(10);
@@ -22,21 +23,22 @@ router.post('/register', (req, res, next) => {
 
         return subscription.save();
 
-    }).then((subscription) => {
+    })
+    .then((subscription) => {
+        subscriptionSaved = subscription;
         // Create amin user
         let user = new User({ type : 'admin', _account : accountSaved._id, email : req.body.email, password : req.body.password });
 
         return user.save();
-    })
+    })``
     .then((user) => {
         // Send email
-        res.render('activate', { token }, (error, html) => {
+        res.render('activate', { account : accountSaved, subscription : subscriptionSaved }, (error, html) => {
             sendgrid.send(user.email, 'Activate your account', html);
+            res.send({ message : `An email has been sent to ${user.email}, please confirm your account.` });
         });
     })
     .catch((e) => res.status(400).send(e));
-
-    user.save().then((doc) => res.send(doc)).catch((e) => res.status(400).send(e));
 });
 
 // Create account and admin user
