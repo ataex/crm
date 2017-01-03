@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
-    selector: 'app-register',
+    selector: 'app-register-form',
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.scss']
 })
@@ -15,14 +15,13 @@ export class RegisterComponent implements OnInit {
     ngOnInit() {
 
         this.registerForm = this.formBuilder.group({
-            firstname: ['', Validators.required],
-            lastname: ['', Validators.required],
+            company: ['', Validators.required],
             email: ['', Validators.required]
         });
     }
 
     onSubmit() {
-        console.log('llll');
+        console.log(this.registerForm.value);
     }
 
 }

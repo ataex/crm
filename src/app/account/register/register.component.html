@@ -1,8 +1,7 @@
-<form [formGroup]="registerForm" (onSubmit)="onSubmit()">
+<form [formGroup]="registerForm" (submit)="onSubmit()">
 
-    <input type="text" formControlName="firstname">
-    <input type="text" formControlName="lastname">
+    <input type="text" formControlName="company">
     <input type="text" formControlName="email">
 
-    <button type="submit">Register</button>
+    <button type="submit" [disabled]="!registerForm.valid">Register</button>
 </form>
