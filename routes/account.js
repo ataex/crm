@@ -23,7 +23,6 @@ router.post('/register', (req, res, next) => {
         let subscription    = new Subscription({ token : token, _account : accountSaved._id });
 
         return subscription.save();
-
     })
     .then((subscription) => {
         subscriptionSaved = subscription;

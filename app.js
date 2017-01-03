@@ -1,10 +1,10 @@
-let express = require('express');
-let path = require('path');
-let favicon = require('serve-favicon');
-let logger = require('morgan');
-let cookieParser = require('cookie-parser');
-let bodyParser = require('body-parser');
-let mongoose = require('./config/mongoose');
+let express         = require('express');
+let path            = require('path');
+let favicon         = require('serve-favicon');
+let logger          = require('morgan');
+let cookieParser    = require('cookie-parser');
+let bodyParser      = require('body-parser');
+let mongoose        = require('./config/mongoose');
 
 // Routes
 let candidate   = require('./routes/candidate');
@@ -41,8 +41,11 @@ app.use('api/user', user);
 app.use('api/candidate', candidate);
 app.use('api/user', candidate);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => res.sendFile(__dirname+'/dist/index.html'));
+// catch 404 and send frontend app
+app.use((req, res, next) => {
+    indexFile = __dirname+'/dist/index.html';
+    res.sendFile(indexFile);
+});
 
 // error handler
 app.use((err, req, res, next) => {

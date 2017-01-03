@@ -11,7 +11,12 @@ export class AccountService {
     constructor(private http: Http) { }
 
     register(account) {
-        this.http.post(this.accountUrl + 'register', account).map(this.extractData).catch(this.handleError);
+        return this.http.post(this.accountUrl + 'register', account).map(this.extractData).catch(this.handleError);
+    }
+
+    activate(account) {
+        let token = account._subscription.token;
+        return this.http.post(this.accountUrl + 'activate/' + token, account).map(this.extractData).catch(this.handleError);
     }
 
     private extractData(res: Response) {

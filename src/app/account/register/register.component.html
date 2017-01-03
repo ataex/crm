@@ -1,7 +1,11 @@
 <form [formGroup]="registerForm" (submit)="onSubmit()">
 
-    <input type="text" formControlName="company">
-    <input type="text" formControlName="email">
+    <input type="text" formControlName="company" placeholder="Company">
+    <input type="text" formControlName="email" placeholder="Email">
+    <input type="password" formControlName="password" placeholder="Password">
+    <input type="password" formControlName="passwordRepeat" placeholder="Repeat password">
 
     <button type="submit" [disabled]="!registerForm.valid">Register</button>
 </form>
+
+{{ registeredMessage }}

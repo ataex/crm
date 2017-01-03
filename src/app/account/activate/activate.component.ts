@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
     selector: 'app-activate',
@@ -8,19 +7,9 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 })
 export class ActivateComponent implements OnInit {
 
-    activateForm: FormGroup;
-
-    constructor(private formBuilder: FormBuilder) { }
+    constructor() { }
 
     ngOnInit() {
-        this.activateForm = this.formBuilder.group({
-            password : ['', Validators.required],
-            passwordRepeat : ['', Validators.required]
-        });
-    }
-
-    onSubmit() {
-
     }
 
 }
