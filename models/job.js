@@ -35,14 +35,6 @@ let Job = mongoose.model('Job', {
     publishedAt : {
         type : Date,
         default : Date.now()
-    },
-    updatedAt : {
-        type : Date,
-        default : Date.now()
-    },
-    deletedAt : {
-        type : Date,
-        default : null
     }
 });
 

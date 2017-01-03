@@ -33,14 +33,6 @@ let CandidateContact = mongoose.model('CandidateContact', {
     reminderRecruiter : {
         type : Boolean,
         default : true
-    },
-    updatedAt : {
-        type : Date,
-        default : Date.now()
-    },
-    deletedAt : {
-        type : Date,
-        default : null
     }
 });
 

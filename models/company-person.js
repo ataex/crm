@@ -23,14 +23,6 @@ let CompanyPerson = mongoose.model('CompanyPerson', {
         type : mongoose.Schema.ObjectId,
         ref : 'Company',
         required : true
-    },
-    updatedAt : {
-        type : Date,
-        default : Date.now()
-    },
-    deletedAt : {
-        type : Date,
-        default : null
     }
 });
 

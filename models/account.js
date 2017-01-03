@@ -9,14 +9,6 @@ let Account = mongoose.model('Account', {
     },
     stripe : {
         type : String
-    },
-    updatedAt : {
-        type : Date,
-        default : Date.now()
-    },
-    deletedAt : {
-        type : Date,
-        default : null
     }
 });
 

@@ -29,14 +29,9 @@ let subscriptionSchema = new Schema({
     enabledAt : {
         type : Date,
         default : null
-    },
-    deletedAt : {
-        type : Date,
-        default : null
     }
 });
 
-subscriptionSchema.plugin(require('./../plugins/updated-at'));
 let Subscription = mongoose.model('Subscription', subscriptionSchema);
 
 module.exports = Subscription;

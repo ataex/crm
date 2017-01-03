@@ -31,14 +31,6 @@ candidateSchema = new Schema({
         type : Schema.ObjectId,
         ref :  'Account',
         required : true
-    },
-    updatedAt : {
-        type : Date,
-        default : Date.now()
-    },
-    deletedAt : {
-        type : Date,
-        default : null
     }
 });
 

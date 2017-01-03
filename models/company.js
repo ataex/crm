@@ -35,14 +35,6 @@ let Company = mongoose.model('Company', {
         type : mongoose.Schema.ObjectId,
         ref :  'Account',
         required : true
-    },
-    updatedAt : {
-        type : Date,
-        default : Date.now()
-    },
-    deletedAt : {
-        type : Date,
-        default : null
     }
 });
 

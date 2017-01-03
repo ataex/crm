@@ -39,14 +39,8 @@ let userSchema = new Schema ({
     _type : {
         type : String,
         ref : 'UserType'
-    },
-    deletedAt : {
-        type : Date,
-        default : null
     }
 });
-
-userSchema.plugin(require('./../plugins/updated-at'));
 
 let User = mongoose.model('User', userSchema);
 

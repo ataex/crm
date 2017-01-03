@@ -11,14 +11,6 @@ let IndustryTemplate = mongoose.model('IndustryTemplate', {
         type: String,
         required : true,
         trim : true
-    },
-    updatedAt : {
-        type : Date,
-        default : Date.now()
-    },
-    deletedAt : {
-        type : Date,
-        default : null
     }
 });
 

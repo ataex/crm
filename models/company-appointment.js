@@ -32,14 +32,6 @@ let CompanyAppointment = mongoose.model('CompanyAppointment', {
     reminderRecruiter : {
         type : Boolean,
         default : true
-    },
-    updatedAt : {
-        type : Date,
-        default : Date.now()
-    },
-    deletedAt : {
-        type : Date,
-        default : null
     }
 });
 
