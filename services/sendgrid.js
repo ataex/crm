@@ -6,8 +6,7 @@ class Sendgrid {
 
         let from_email  = new helper.Email('noreply@crm.com');
         let to_email    = new helper.Email(toEmail);
-        content         = new helper.Content(contentType, content);
-        let mail        = new helper.Mail(from_email, subject, to_email, content);
+        let mail        = new helper.Mail(from_email, subject, to_email, new helper.Content(contentType, content));
 
         let sg = require('sendgrid')(config.sendgrid);
         let request = sg.emptyRequest({
