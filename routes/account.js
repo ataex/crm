@@ -1,11 +1,12 @@
 let express             = require('express');
 let router              = express.Router();
 let { ObjectID }        = require('mongodb');
+let config              = require('./../config/config.js');
 let _                   = require('lodash');
 let Subscription        = require('./../models/subscription');
 let Account             = require('./../models/account');
 let User                = require('./../models/user');
-let crypto              = require('crypto-js');
+let crypto              = require('crypto');
 let sendgrid            = require('./../services/sendgrid');
 
 // Create account and admin user
@@ -18,8 +19,7 @@ router.post('/register', (req, res, next) => {
 
     account.save().then((account) => {
         // Create subscription
-        let token            = crypto.SHA256();
-        console.log(token, token.toString());
+        let token           = crypto.randomBytes(32).toString('hex');
         accountSaved        = account;
         let subscription    = new Subscription({ token : token, _account : accountSaved._id });
 
@@ -28,14 +28,18 @@ router.post('/register', (req, res, next) => {
     .then((subscription) => {
         subscriptionSaved = subscription;
         // Create amin user
-        let user = new User({ _type : 'admin', _account : accountSaved._id, email : req.body.email, password : req.body.password  });
+        let user = new User({
+            _type : 'admin', _account : accountSaved._id,
+            email : req.body.email,
+            password : crypto.createHash('sha256').update(req.body.password + config.secret).digest('hex')
+        });
 
         return user.save();
     })
     .then((user) => {
         // Send email
         res.render('activate', { account : accountSaved, subscription : subscriptionSaved }, (error, html) => {
-            //sendgrid.send(user.email, 'Activate your account', html);
+            sendgrid.send(user.email, 'Activate your account', html);
             res.send({ message : `An email has been sent to ${user.email}, please confirm your account.` });
         });
     })
