@@ -14,9 +14,8 @@ export class AccountService {
         return this.http.post(this.accountUrl + 'register', account).map(this.extractData).catch(this.handleError);
     }
 
-    activate(account) {
-        let token = account._subscription.token;
-        return this.http.post(this.accountUrl + 'activate/' + token, account).map(this.extractData).catch(this.handleError);
+    activate(token) {
+        return this.http.post(this.accountUrl + 'activate/' + token, {}).map(this.extractData).catch(this.handleError);
     }
 
     private extractData(res: Response) {

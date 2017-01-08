@@ -16,7 +16,7 @@ const routes: Routes = [
   { path : 'candidate/create', component : CandidateCreateComponent },
   { path : 'candidate/update/:id', component : CandidateUpdateComponent },
   { path : 'register', component : RegisterComponent },
-  { path : 'activate', component : ActivateComponent },
+  { path : 'activate/:token', component : ActivateComponent },
   { path : 'login', component : LoginComponent },
 ];
 

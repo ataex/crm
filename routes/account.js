@@ -50,16 +50,14 @@ router.post('/register', (req, res, next) => {
 router.post('/activate/:token', (req, res, next) => {
 
     Subscription
-        .findOneAndUpdate({ token : req.params.token }, {  $set : req.body }, { new : true } )
+        .findOneAndUpdate({ token : req.params.token }, {  $set : { enabledAt : new Date } }, { new : true } )
         .then((subscription) => {
-            subscription.enabledAt = new Date;
+            res.send(subscription._account);
         })
-        .catch((e) => res.status(400).send(e));
-
-    let user        = new User(req.body);
-    user._account   = accountId;
-
-    user.save().then((doc) => res.send(doc)).catch((e) => res.status(400).send(e));
+        .catch((e) => {
+        console.log(e);
+        res.status(400).send(e);
+        });
 });
 
 
