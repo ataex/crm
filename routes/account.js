@@ -40,8 +40,9 @@ router.post('/register', (req, res, next) => {
     .then((user) => {
         // Send email
         res.render('activate', { account : accountSaved, subscription : subscriptionSaved, user : user }, (error, html) => {
-            sendgrid.send(user.email, 'Activate your account', html);
-            res.send({ message : `An email has been sent to ${user.email}, please confirm your account.` });
+            if(error) res.status(400).send(error);
+            sendgrid.send(user.email, 'activate_account', html);
+            res.send(user);
         });
     })
     .catch((e) => res.status(400).send(e));

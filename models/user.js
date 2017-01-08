@@ -28,6 +28,9 @@ let userSchema = new Schema ({
         type : Boolean,
         default : false
     },
+    token : {
+        type : String
+    },
     _account : {
         type: Schema.ObjectId,
         ref : 'Company',
