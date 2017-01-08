@@ -37,6 +37,15 @@ let subscriptionSchema = new Schema({
     }
 });
 
+subscriptionSchema.set('toJSON', {
+    transform: function(doc, ret, options) {
+        delete ret.token;
+        return ret;
+    }
+});
+
 let Subscription = mongoose.model('Subscription', subscriptionSchema);
+
+
 
 module.exports = Subscription;

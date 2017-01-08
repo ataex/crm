@@ -54,7 +54,7 @@ router.post('/activate/:token', (req, res, next) => {
     Subscription
         .findOneAndUpdate({ token : req.params.token }, {  $set : { enabledAt : new Date } }, { new : true } ).populate('_account', '-token')
         .then((subscription) => {
-            res.send(subscription);
+            res.send(subscription.toJSON());
         })
         .catch((e) => res.status(400).send(e));
 });

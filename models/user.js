@@ -18,8 +18,7 @@ let userSchema = new Schema ({
     },
     password : {
         type : String,
-        required : true,
-        select: false
+        required : true
     },
     roles : {
         type : Array
@@ -43,6 +42,14 @@ let userSchema = new Schema ({
     _type : {
         type : String,
         ref : 'UserType'
+    }
+});
+
+userSchema.set('toJSON', {
+    transform: function(doc, ret, options) {
+        delete ret.token;
+        delete ret.password;
+        return ret;
     }
 });
 

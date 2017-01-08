@@ -4,6 +4,7 @@ let User                    = require('./../models/user');
 let { ObjectID }            = require('mongodb');
 let _                       = require('lodash');
 let sendgrid                = require('./../services/sendgrid');
+let crypto                  = require('crypto');
 
 // Get all users
 router.get('/', (req, res, next)    => {
@@ -71,6 +72,7 @@ router.post('/forgot-password', (req, res, next) => {
            }
            else {
                user.requestPasswordAt = new Date();
+               user.token = crypto.randomBytes(32).toString('hex')
                return user.save();
            }
        }
@@ -82,7 +84,7 @@ router.post('/forgot-password', (req, res, next) => {
         res.render('reset-password', { user : user }, (html, error) => {
             if(error) res.status(400).send(error);
             sendgrid.send(user.email, 'reset_password', html);
-            res.send(user);
+            res.send(user.toJSON({ password : false, token : false }));
         });
     })
     .catch((e) => res.status(400).send(e));
@@ -90,13 +92,19 @@ router.post('/forgot-password', (req, res, next) => {
 
 router.post('/reset-password/:token', (req, res, next) => {
 
-    // Find user with given email
+    // Find user with given token
     User.findOne({ token : req.params.token }).then((user) => {
         // User found
         if(user) {
-            // Check last time user requested forgot-password
-            let now                  = time();
-            let requestePasswordAt   = user.requestPasswordAt ? user.requestPasswordAt.getTime() : time();
+
+            // User email matches
+            if(user.email == req.params.email){
+
+            }
+            else {
+
+            }
+
 
             // If forgot-password requested in the last 24 hours
             if(now - requestePasswordAt <= (24 * 60 * 60)) {
