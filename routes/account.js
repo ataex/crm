@@ -29,7 +29,8 @@ router.post('/register', (req, res, next) => {
         subscriptionSaved = subscription;
         // Create amin user
         let user = new User({
-            _type : 'admin', _account : accountSaved._id,
+            _type : 'admin',
+            _account : accountSaved._id,
             email : req.body.email,
             password : crypto.createHash('sha256').update(req.body.password + config.secret).digest('hex')
         });
@@ -38,7 +39,7 @@ router.post('/register', (req, res, next) => {
     })
     .then((user) => {
         // Send email
-        res.render('activate', { account : accountSaved, subscription : subscriptionSaved }, (error, html) => {
+        res.render('activate', { account : accountSaved, subscription : subscriptionSaved, user : user }, (error, html) => {
             sendgrid.send(user.email, 'Activate your account', html);
             res.send({ message : `An email has been sent to ${user.email}, please confirm your account.` });
         });
@@ -50,14 +51,11 @@ router.post('/register', (req, res, next) => {
 router.post('/activate/:token', (req, res, next) => {
 
     Subscription
-        .findOneAndUpdate({ token : req.params.token }, {  $set : { enabledAt : new Date } }, { new : true } )
+        .findOneAndUpdate({ token : req.params.token }, {  $set : { enabledAt : new Date } }, { new : true } ).populate('_account', '-token')
         .then((subscription) => {
-            res.send(subscription._account);
+            res.send(subscription);
         })
-        .catch((e) => {
-        console.log(e);
-        res.status(400).send(e);
-        });
+        .catch((e) => res.status(400).send(e));
 });
 
 
