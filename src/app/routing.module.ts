@@ -6,7 +6,7 @@ import { CandidateCreateComponent } from "./candidate/candidate-create/candidate
 import { CandidateUpdateComponent } from "./candidate/candidate-update/candidate-update.component";
 import { RegisterComponent } from "./account/register/register.component";
 import { ActivateComponent } from "./account/activate/activate.component";
-import { LoginComponent } from "./login/login.component";
+import { LoginComponent } from "./user/login/login.component";
 
 
 const routes: Routes = [

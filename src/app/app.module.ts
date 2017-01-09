@@ -15,7 +15,9 @@ import { CandidateUpdateComponent } from './candidate/candidate-update/candidate
 import { CandidateFormComponent } from './candidate/candidate-form/candidate-form.component';
 import { RegisterComponent } from './account/register/register.component';
 import { ActivateComponent } from './account/activate/activate.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './user/login/login.component';
+import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './user/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { LoginComponent } from './login/login.component';
     CandidateFormComponent,
     RegisterComponent,
     ActivateComponent,
-    LoginComponent
+    LoginComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
