@@ -5,7 +5,7 @@ let { ObjectID }            = require('mongodb');
 let _                       = require('lodash');
 let sendgrid                = require('./../services/sendgrid');
 let crypto                  = require('crypto');
-let config                  = require('./../config/config')
+let config                  = require('./../config/config');
 
 // Get all users
 router.get('/', (req, res, next)    => {
@@ -72,7 +72,6 @@ router.post('/login', (req, res, next) => {
         }).
 
         catch((e) => res.status(400).send(e));
-
 });
 
 router.post('/forgot-password', (req, res, next) => {
