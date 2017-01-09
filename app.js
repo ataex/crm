@@ -40,7 +40,7 @@ app.use(function(req, res, next) {
 app.use('/api/account', account);
 app.use('/api/user', user);
 app.use('/api/candidate', candidate);
-app.use('/api/user', candidate);
+app.use('/api/user', user);
 
 // catch 404 and send frontend app
 app.use((req, res, next) => {

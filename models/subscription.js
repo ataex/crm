@@ -46,6 +46,4 @@ subscriptionSchema.set('toJSON', {
 
 let Subscription = mongoose.model('Subscription', subscriptionSchema);
 
-
-
 module.exports = Subscription;
