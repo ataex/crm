@@ -32,7 +32,7 @@ router.post('/register', (req, res, next) => {
             _type : 'admin',
             _account : accountSaved._id,
             email : req.body.email,
-            password : crypto.createHash('sha256').update(req.body.password + config.secret).digest('hex')
+            password : req.body.password
         });
 
         return user.save();

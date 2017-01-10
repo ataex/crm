@@ -55,15 +55,12 @@ userSchema.set('toJSON', {
     }
 });
 
-userSchema.pre('save', (next) => {
-    let user = this;
+userSchema.pre('save', function(next) {
 
     if(this.isModified('password')) {
-        bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(user.password, salt, function(err, hash) {
-                user.password = hash;
-                next();
-            });
+        bcrypt.hash(this.password, 10, (err, hash) => {
+            this.password = hash;
+            next();
         });
     }
     else {

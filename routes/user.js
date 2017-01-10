@@ -6,6 +6,7 @@ let _                       = require('lodash');
 let sendgrid                = require('./../services/sendgrid');
 let crypto                  = require('crypto');
 let config                  = require('./../config/config');
+let bcrypt                  = require('bcryptjs');
 
 // Get all users
 router.get('/', (req, res, next)    => {
@@ -56,19 +57,22 @@ router.post('/login', (req, res, next) => {
     if(_.isEmpty(data) || !data.email || !data.password) res.status(400).send({ error : 'data_not_valid' });
 
     // Get user with email
-    User.find({ email : data.email })
+    User.findOne({ email : data.email })
         .then((user) => {
             // If user found
             if(user) {
-                // If password is valid
-                if(user.password == crypto.createHash('sha256').update(data.password + config.secret).digest('hex')) {
-                    // Create token
-                    let token;
-                    res.header({ 'x-auth' : token }).send({});
-                }
-                else {
-                    res.status(400).send({ error : 'password_not_valid' });
-                }
+                // Check password
+                bcrypt.compare(data.password, user.password, (error, result) => {
+                    // If password is valid
+                    if(result) {
+                        // Create token
+                        let token = 'token';
+                        res.header({ 'x-auth' : token }).send({ test : 'testtt' });
+                    }
+                    else {
+                        res.status(400).send({ error : 'password_not_valid' });
+                    }
+                });
             }
             else {
                 res.status(400).send({ error : 'user_not_found' });
@@ -80,7 +84,7 @@ router.post('/login', (req, res, next) => {
 router.post('/forgot-password', (req, res, next) => {
 
     // Find user with given email
-    User.findOne({ email : req.params.email }).then((user) => {
+    User.findOne({ email : req.body.email }).then((user) => {
         // User found
        if(user) {
            // Check last time user requested forgot-password
@@ -117,10 +121,9 @@ router.post('/reset-password/:token', (req, res, next) => {
     User.findOne({ token : req.params.token }).then((user) => {
         // User found
         if(user) {
-
             // User email matches
-            if(user.email == req.params.email){
-                user.password = crypto.createHash('sha256').update(req.params.email + config.secret).digest('hex');
+            if(user.email == req.body.email){
+                user.password = req.body.password;
                 return user.save();
             }
             else {
