@@ -51,6 +51,8 @@ router.delete('/:id', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
 
+    console.log(req.params);
+
     // Get user with email
     User.find({ email : req.params.email })
         .then((user) => {
