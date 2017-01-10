@@ -1,5 +1,6 @@
 const mongoose  = require('mongoose');
 const Schema    = mongoose.Schema;
+const bcrypt    = require('bcryptjs');
 
 let userSchema = new Schema ({
 
@@ -51,6 +52,22 @@ userSchema.set('toJSON', {
         delete ret.token;
         delete ret.password;
         return ret;
+    }
+});
+
+userSchema.pre('save', (next) => {
+    let user = this;
+
+    if(this.isModified('password')) {
+        bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(user.password, salt, function(err, hash) {
+                user.password = hash;
+                next();
+            });
+        });
+    }
+    else {
+        next();
     }
 });
 
