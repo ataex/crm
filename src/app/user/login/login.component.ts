@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
+import { Response } from '@angular/http';
 
 @Component({
     selector: 'app-login',
@@ -28,7 +29,9 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-
+        this.userService.login(this.loginForm.value).subscribe((response: Response) => {
+            console.log(response);
+        });
     }
 
 }

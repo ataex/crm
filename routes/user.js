@@ -51,18 +51,21 @@ router.delete('/:id', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
 
-    console.log(req.params);
+    let data = _.pick(req.body, ['email', 'password']);
+
+    if(_.isEmpty(data) || !data.email || !data.password) res.status(400).send({ error : 'data_not_valid' });
 
     // Get user with email
-    User.find({ email : req.params.email })
+    User.find({ email : data.email })
         .then((user) => {
             // If user found
             if(user) {
                 // If password is valid
-                if(user.password == crypto.createHash('sha256').update(req.params.email + config.secret).digest('hex')) {
+                if(user.password == crypto.createHash('sha256').update(data.password + config.secret).digest('hex')) {
                     // Create token
                     let token;
-                    // res.send();
+                    res.headers({ 'x-auth' : token }).send({});
+                    res.write('working') ;
                 }
                 else {
                     res.status(400).send({ error : 'password_not_valid' });
@@ -72,7 +75,6 @@ router.post('/login', (req, res, next) => {
                 res.status(400).send({ error : 'user_not_found' });
             }
         }).
-
         catch((e) => res.status(400).send(e));
 });
 

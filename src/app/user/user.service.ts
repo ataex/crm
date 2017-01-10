@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from "@angular/http";
+import { Http, Response } from '@angular/http';
 import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class UserService {
 
-    private userUrl = environment.baseUrl + 'user';
+    private userUrl = environment.baseUrl + 'api/user';
 
     constructor(private http: Http) { }
 
-    login(email, password) {
-        this.http.post(this.userUrl + '/login', { email, password }).map(this.extractData).catch(this.handleError);
+    login(formData) {
+        return this.http.post(this.userUrl + '/login', formData).map(this.extractData).catch(this.handleError);
     }
 
     private extractData(res: Response) {
