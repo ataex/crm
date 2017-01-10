@@ -64,8 +64,7 @@ router.post('/login', (req, res, next) => {
                 if(user.password == crypto.createHash('sha256').update(data.password + config.secret).digest('hex')) {
                     // Create token
                     let token;
-                    res.headers({ 'x-auth' : token }).send({});
-                    res.write('working') ;
+                    res.header({ 'x-auth' : token }).send({});
                 }
                 else {
                     res.status(400).send({ error : 'password_not_valid' });
