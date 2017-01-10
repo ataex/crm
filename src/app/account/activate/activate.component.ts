@@ -18,7 +18,7 @@ export class ActivateComponent implements OnInit {
         this.activatedRoute.params.subscribe((params) => {
             this.token = params['token'];
             this.accountService.activate(this.token).subscribe((account) => {
-                this.router.navigate(['/login'], { queryParams : { activated : true } });
+                this.router.navigate(['/login'], { queryParams : { accountActivated : 1 } });
             });
         });
     }

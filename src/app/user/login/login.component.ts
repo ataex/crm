@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: 'app-login',
@@ -11,13 +12,18 @@ import { UserService } from '../user.service';
 export class LoginComponent implements OnInit {
 
     loginForm: FormGroup;
+    queryParams: {};
 
-    constructor(private formBuilder: FormBuilder, private userService: UserService) { }
+    constructor(private formBuilder: FormBuilder, private userService: UserService, private activatedRoute: ActivatedRoute) { }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
             email : ['', Validators.required],
             password : ['', Validators.required]
+        });
+
+        this.activatedRoute.queryParams.subscribe((queryParams) => {
+            this.queryParams = queryParams;
         });
     }
 
