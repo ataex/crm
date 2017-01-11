@@ -40,7 +40,7 @@ app.use((req, res, next) => {
         jwt.verify(XAuthToken, config.secret, (error, decoded) => {
             if(error) { res.status(403).send(); }
             else {
-                res.header({ 'X-Auth-Token' : token });
+                res.header({ 'X-Auth-Token' : XAuthToken });
                 next();
             }
         });

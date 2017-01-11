@@ -18,6 +18,8 @@ import { ActivateComponent } from './account/activate/activate.component';
 import { LoginComponent } from './user/login/login.component';
 import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './user/reset-password/reset-password.component';
+import { SecurityService } from './shared/security.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { ResetPasswordComponent } from './user/reset-password/reset-password.com
     ActivateComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,7 @@ import { ResetPasswordComponent } from './user/reset-password/reset-password.com
     RoutingModule,
     MaterialModule.forRoot()
   ],
-  providers: [],
+  providers: [SecurityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

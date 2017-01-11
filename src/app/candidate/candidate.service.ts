@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { environment } from './../../environments/environment';
+import { SecurityService } from '../shared/security.service';
 
 @Injectable()
 export class CandidateService {
 
   private candidateUrl = environment.baseUrl + 'api/candidate';
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private securityService: SecurityService) {}
 
   getCandidate(id) {
-    return this.http.get(this.candidateUrl + '/' + id).map(this.extractData).catch(this.handleError);
+    return this.http.get(this.candidateUrl + '/' + id, this.securityService.getHeaders()).map(this.extractData).catch(this.handleError);
   }
 
   getCandidates() {
