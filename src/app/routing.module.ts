@@ -7,17 +7,19 @@ import { CandidateUpdateComponent } from './candidate/candidate-update/candidate
 import { RegisterComponent } from './account/register/register.component';
 import { ActivateComponent } from './account/activate/activate.component';
 import { LoginComponent } from './user/login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path : 'home', component : HomeComponent },
-  { path : 'candidates', component : CandidateListComponent },
-  { path : 'candidate/create', component : CandidateCreateComponent },
-  { path : 'candidate/update/:id', component : CandidateUpdateComponent },
-  { path : 'register', component : RegisterComponent },
-  { path : 'activate/:token', component : ActivateComponent },
-  { path : 'login', component : LoginComponent },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path : 'home', component : HomeComponent },
+    { path : 'candidates', component : CandidateListComponent },
+    { path : 'candidate/create', component : CandidateCreateComponent },
+    { path : 'candidate/update/:id', component : CandidateUpdateComponent },
+    { path : 'register', component : RegisterComponent },
+    { path : 'activate/:token', component : ActivateComponent },
+    { path : 'login', component : LoginComponent },
+    { path : 'dashboard', component : DashboardComponent }
 ];
 
 @NgModule({

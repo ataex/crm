@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
 
     loginForm: FormGroup;
     queryParams: {};
+    loginMessage: String;
 
     constructor(
       private formBuilder: FormBuilder,
@@ -25,6 +26,9 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+
+        if(this.securityService.isLogged()) this.router.navigateByUrl('/dashboard');
+
         this.loginForm = this.formBuilder.group({
             email : ['', Validators.required],
             password : ['', Validators.required]
@@ -39,12 +43,11 @@ export class LoginComponent implements OnInit {
         this.userService.login(this.loginForm.value).subscribe(
             (response: Response) => {
                 this.securityService.setAuthToken(response.headers.get('X-Auth-Token'));
-
+                this.router.navigateByUrl('/dashboard');
             },
-          error => {
-                console.log(error);
-          }
+            error => {
+                this.loginMessage = 'Your credentials are not valid.';
+            }
         );
     }
-
 }
