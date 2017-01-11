@@ -34,19 +34,23 @@ app.use(require('node-sass-middleware')({
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
+// Security firewall - User must be logged unless route is defined in the above array
 app.use((req, res, next) => {
-    let openRoutes = ['/api/user/login'];
+    let openRoutes = ['/api/user/login', '/api/account/register'];
 
     // // If routes is protected
     if(req.method != 'OPTIONS' && !openRoutes.includes(req.path)) {
         // Check if token exists and is valid
         let XAuthToken = req.header('X-Auth-Token');
-        if(!XAuthToken || !jwt.verify(XAuthToken, config.secret)) res.status(403).send();
+        jwt.verify(XAuthToken, config.secret, (error, decoded) => {
+            if(error) { res.status(403).send(); }
+            else { next(); }
+        });
     }
-
-    next();
+    else { next(); }
 });
 
+// CORS and other header options
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -54,6 +58,7 @@ app.use((req, res, next) => {
     res.header('Access-Control-Expose-Headers', 'X-Auth-Token');
     next();
 });
+
 app.use('/api/account', account);
 app.use('/api/user', user);
 app.use('/api/candidate', candidate);
