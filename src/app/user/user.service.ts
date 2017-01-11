@@ -31,8 +31,4 @@ export class UserService {
         console.error(errMsg);
         return Observable.throw(errMsg);
     }
-
-    isLogged() {
-        return localStorage.getItem('X-Auth-Token') ? true : false;
-    }
 }

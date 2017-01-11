@@ -8,12 +8,7 @@ let mongoose        = require('./config/mongoose');
 let jwt             = require('jsonwebtoken');
 let config          = require('./config/config');
 let _               = require('lodash');
-
-// Routes
-let candidate   = require('./routes/candidate');
-let user        = require('./routes/user');
-let account     = require('./routes/account');
-let app         = express();
+let app             = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,13 +33,16 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use((req, res, next) => {
     let openRoutes = ['/api/user/login', '/api/account/register'];
 
-    // // If routes is protected
+    // If routes is protected
     if(req.method != 'OPTIONS' && !openRoutes.includes(req.path)) {
         // Check if token exists and is valid
         let XAuthToken = req.header('X-Auth-Token');
         jwt.verify(XAuthToken, config.secret, (error, decoded) => {
             if(error) { res.status(403).send(); }
-            else { next(); }
+            else {
+                res.header({ 'X-Auth-Token' : token });
+                next();
+            }
         });
     }
     else { next(); }
@@ -59,10 +57,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/account', account);
-app.use('/api/user', user);
-app.use('/api/candidate', candidate);
-app.use('/api/user', user);
+app.use('/api/account', require('./routes/account'));
+app.use('/api/user', require('./routes/user'));
+app.use('/api/candidate', require('./routes/candidate'));
 
 // catch 404 and send frontend app
 app.use((req, res, next) => {
