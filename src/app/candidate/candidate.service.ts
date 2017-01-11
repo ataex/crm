@@ -8,23 +8,26 @@ import { SecurityService } from '../shared/security.service';
 export class CandidateService {
 
   private candidateUrl = environment.baseUrl + 'api/candidate';
+  private securityRequestOptions;
 
-  constructor(private http: Http, private securityService: SecurityService) {}
+  constructor(private http: Http, private securityService: SecurityService) {
+      this.securityRequestOptions = this.securityService.getRequestOptions();
+  }
 
   getCandidate(id) {
-    return this.http.get(this.candidateUrl + '/' + id, this.securityService.getHeaders()).map(this.extractData).catch(this.handleError);
+    return this.http.get(this.candidateUrl + '/' + id, this.securityRequestOptions).map(this.extractData).catch(this.handleError);
   }
 
   getCandidates() {
-    return this.http.get(this.candidateUrl).map(this.extractData).catch(this.handleError);
+    return this.http.get(this.candidateUrl, this.securityRequestOptions).map(this.extractData).catch(this.handleError);
   }
 
   createCandidate(candidate) {
-    return this.http.post(this.candidateUrl, candidate).map(this.extractData).catch(this.handleError);
+    return this.http.post(this.candidateUrl, candidate, this.securityRequestOptions).map(this.extractData).catch(this.handleError);
   }
 
   updateCandidate(id, candidate) {
-    return this.http.patch(this.candidateUrl + '/' + id, candidate).map(this.extractData).catch(this.handleError);
+    return this.http.patch(this.candidateUrl + '/' + id, candidate, this.securityRequestOptions).map(this.extractData).catch(this.handleError);
   }
 
   deleteCandidate(id) {

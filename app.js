@@ -51,7 +51,7 @@ app.use((req, res, next) => {
 // CORS and other header options
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token');
     res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT, PATCH');
     res.header('Access-Control-Expose-Headers', 'X-Auth-Token');
     next();

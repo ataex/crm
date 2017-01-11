@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Headers, RequestOptionsArgs } from "@angular/http";
 
 @Injectable()
 export class SecurityService {
@@ -9,12 +10,19 @@ export class SecurityService {
         return localStorage.getItem('X-Auth-Token') ? true : false;
     }
 
-    getHeaders() {
-      return { 'X-Auth-Token' : this.getAuthToken() }
+    getRequestOptions() {
+        return { headers : this.getHeaders() };
     }
 
     setAuthToken(XAuthToken) {
         localStorage.setItem('X-Auth-Token', XAuthToken);
+    }
+
+    private getHeaders() {
+        let headers = new Headers;
+        headers.append('X-Auth-Token', this.getAuthToken());
+
+        return headers;
     }
 
     private getAuthToken() {
