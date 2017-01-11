@@ -5,6 +5,8 @@ let logger          = require('morgan');
 let cookieParser    = require('cookie-parser');
 let bodyParser      = require('body-parser');
 let mongoose        = require('./config/mongoose');
+let jwt             = require('jsonwebtoken');
+let config          = require('./config/config');
 
 // Routes
 let candidate   = require('./routes/candidate');
@@ -31,7 +33,24 @@ app.use(require('node-sass-middleware')({
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
+    let openRoutes = ['/api/user/login'];
+
+    // If routes is protected
+    if(req.method != 'OPTIONS' || openRoutes.includes(req.path)) {
+
+        console.log(req.method + '--' + req.path);
+
+
+        // Check if token exists and is valid
+        // let XAuthToken = req.header('X-Auth-Token');
+        // if(!XAuthToken || !jwt.verify(XAuthToken, config.secret)) res.status(403).send();
+    }
+
+    next();
+});
+
+app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT, PATCH');
