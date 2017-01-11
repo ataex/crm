@@ -1,12 +1,13 @@
-let express                 = require('express');
-let router                  = express.Router();
-let User                    = require('./../models/user');
-let { ObjectID }            = require('mongodb');
-let _                       = require('lodash');
-let sendgrid                = require('./../services/sendgrid');
-let crypto                  = require('crypto');
-let config                  = require('./../config/config');
-let bcrypt                  = require('bcryptjs');
+let express         = require('express');
+let router          = express.Router();
+let User            = require('./../models/user');
+let { ObjectID }    = require('mongodb');
+let _               = require('lodash');
+let sendgrid        = require('./../services/sendgrid');
+let crypto          = require('crypto');
+let config          = require('./../config/config');
+let bcrypt          = require('bcryptjs');
+let jwt             = require('jsonwebtoken');
 
 // Get all users
 router.get('/', (req, res, next)    => {
@@ -66,8 +67,8 @@ router.post('/login', (req, res, next) => {
                     // If password is valid
                     if(result) {
                         // Create token
-                        let token = 'token';
-                        res.header({ 'x-auth' : token }).send({ test : 'testtt' });
+                        let token = jwt.sign({ id : user._id }, config.secret);
+                        res.header({ 'X-auth' : token }).send({ test : 'testtt' });
                     }
                     else {
                         res.status(400).send({ error : 'password_not_valid' });

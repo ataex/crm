@@ -1,5 +1,6 @@
 const config = {
-    sendgrid : ''
+    sendgrid : '',
+    secret : ''
 };
 
 module.exports = config;
