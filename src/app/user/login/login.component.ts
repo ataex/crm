@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         this.userService.login(this.loginForm.value).subscribe((response: Response) => {
-            console.log(response);
+            console.log(response.headers.get('X-Auth-Token'));
         });
     }
 

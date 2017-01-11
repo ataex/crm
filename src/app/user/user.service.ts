@@ -11,7 +11,7 @@ export class UserService {
     constructor(private http: Http) { }
 
     login(formData) {
-        return this.http.post(this.userUrl + '/login', formData).map(this.extractData).catch(this.handleError);
+        return this.http.post(this.userUrl + '/login', formData).catch(this.handleError);
     }
 
     private extractData(res: Response) {

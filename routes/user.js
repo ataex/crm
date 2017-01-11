@@ -68,7 +68,7 @@ router.post('/login', (req, res, next) => {
                     if(result) {
                         // Create token
                         let token = jwt.sign({ id : user._id }, config.secret);
-                        res.header({ 'X-auth' : token }).send({ test : 'testtt' });
+                        res.header({ 'X-Auth-Token' : token }).send();
                     }
                     else {
                         res.status(400).send({ error : 'password_not_valid' });
