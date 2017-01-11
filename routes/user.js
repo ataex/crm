@@ -55,7 +55,7 @@ router.post('/login', (req, res, next) => {
 
     let data = _.pick(req.body, ['email', 'password']);
 
-    if(_.isEmpty(data) || !data.email || !data.password) res.status(400).send({ error : 'data_not_valid' });
+    if(_.isEmpty(data) || !data.email || !data.password) res.status(401).send({ error : 'data_not_valid' });
 
     // Get user with email
     User.findOne({ email : data.email })
@@ -71,15 +71,15 @@ router.post('/login', (req, res, next) => {
                         res.header({ 'X-Auth-Token' : token }).send();
                     }
                     else {
-                        res.status(400).send({ error : 'password_not_valid' });
+                        res.status(401).send({ error : 'password_not_valid' });
                     }
                 });
             }
             else {
-                res.status(400).send({ error : 'user_not_found' });
+                res.status(401).send({ error : 'user_not_found' });
             }
         }).
-        catch((e) => res.status(400).send(e));
+        catch((e) => res.status(401).send(e));
 });
 
 router.post('/forgot-password', (req, res, next) => {

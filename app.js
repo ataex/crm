@@ -7,6 +7,7 @@ let bodyParser      = require('body-parser');
 let mongoose        = require('./config/mongoose');
 let jwt             = require('jsonwebtoken');
 let config          = require('./config/config');
+let _               = require('lodash');
 
 // Routes
 let candidate   = require('./routes/candidate');
@@ -36,15 +37,11 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use((req, res, next) => {
     let openRoutes = ['/api/user/login'];
 
-    // If routes is protected
-    if(req.method != 'OPTIONS' || openRoutes.includes(req.path)) {
-
-        console.log(req.method + '--' + req.path);
-
-
+    // // If routes is protected
+    if(req.method != 'OPTIONS' && !openRoutes.includes(req.path)) {
         // Check if token exists and is valid
-        // let XAuthToken = req.header('X-Auth-Token');
-        // if(!XAuthToken || !jwt.verify(XAuthToken, config.secret)) res.status(403).send();
+        let XAuthToken = req.header('X-Auth-Token');
+        if(!XAuthToken || !jwt.verify(XAuthToken, config.secret)) res.status(403).send();
     }
 
     next();
