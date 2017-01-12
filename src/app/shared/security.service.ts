@@ -7,7 +7,7 @@ export class SecurityService {
     constructor() { }
 
     isLogged() {
-        return localStorage.getItem('X-Auth-Token') ? true : false;
+        return !!localStorage.getItem('X-Auth-Token');
     }
 
     getRequestOptions() {

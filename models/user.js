@@ -34,7 +34,7 @@ let userSchema = new Schema({
     },
     _account : {
         type: Schema.ObjectId,
-        ref : 'Company',
+        ref : 'Account',
         required : true
     },
     _agency : {
