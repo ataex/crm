@@ -1,14 +1,12 @@
-let express         = require('express');
-let path            = require('path');
-let favicon         = require('serve-favicon');
-let logger          = require('morgan');
-let cookieParser    = require('cookie-parser');
-let bodyParser      = require('body-parser');
-let mongoose        = require('./config/mongoose');
-let jwt             = require('jsonwebtoken');
-let config          = require('./config/config');
-let _               = require('lodash');
-let app             = express();
+let express             = require('express');
+let path                = require('path');
+let favicon             = require('serve-favicon');
+let logger              = require('morgan');
+let cookieParser        = require('cookie-parser');
+let bodyParser          = require('body-parser');
+let mongoose            = require('./config/mongoose');
+let app                 = express();
+let authTokenMiddleware = require('./middlewares/auth-token');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,24 +27,8 @@ app.use(require('node-sass-middleware')({
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Security firewall - User must be logged unless route is defined in the above array
-app.use((req, res, next) => {
-    let openRoutes = ['/api/user/login', '/api/account/register'];
-
-    // If routes is protected
-    if(req.method != 'OPTIONS' && !openRoutes.includes(req.path)) {
-        // Check if token exists and is valid
-        let XAuthToken = req.header('X-Auth-Token');
-        jwt.verify(XAuthToken, config.secret, (error, decoded) => {
-            if(error) { res.status(403).send(); }
-            else {
-                res.header({ 'X-Auth-Token' : XAuthToken });
-                next();
-            }
-        });
-    }
-    else { next(); }
-});
+// Set security middleware
+app.use(authTokenMiddleware);
 
 // CORS and other header options
 app.use((req, res, next) => {
