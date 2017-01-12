@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SecurityService } from "../shared/security.service";
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+    isLogged;
 
-  ngOnInit() {
-  }
+    constructor(private securityService: SecurityService, private router: Router) {}
+
+    ngOnInit() {
+
+        this.router.events.subscribe((event) => {
+            if(event instanceof NavigationEnd) {
+                this.isLogged = this.securityService.isLogged();
+            }
+        });
+    }
 
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs';
-import { SecurityService } from "../shared/security.service";
+import { SecurityService } from '../shared/security.service';
 
 @Injectable()
 export class UserService {
@@ -27,6 +27,7 @@ export class UserService {
     }
 
     private handleError (error: Response | any) {
+
         // In a real world app, we might use a remote logging infrastructure
         let errMsg: string;
         if (error instanceof Response) {

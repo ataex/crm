@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
             // Allow Access and set environment
             else {
                 // Already set token in response
-                res.header({ 'X-Auth-Token' : XAuthToken });
+                res.setHeader('X-Auth-Token',  XAuthToken);
                 // Get User and set to request so we can use it later
                 User.findById(userData.id).populate('_account').then(user => {
                     if(user) req.user = user;

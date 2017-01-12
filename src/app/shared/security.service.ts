@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, RequestOptionsArgs } from "@angular/http";
+import { Headers } from "@angular/http";
 
 @Injectable()
 export class SecurityService {
