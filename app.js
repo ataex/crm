@@ -1,12 +1,17 @@
-let express             = require('express');
-let path                = require('path');
-let favicon             = require('serve-favicon');
-let logger              = require('morgan');
-let cookieParser        = require('cookie-parser');
-let bodyParser          = require('body-parser');
-let mongoose            = require('./config/mongoose');
-let app                 = express();
-let authTokenMiddleware = require('./middlewares/auth-token');
+let express                 = require('express');
+let path                    = require('path');
+let favicon                 = require('serve-favicon');
+let logger                  = require('morgan');
+let cookieParser            = require('cookie-parser');
+let bodyParser              = require('body-parser');
+let mongoose                = require('./config/mongoose');
+let app                     = express();
+let authTokenMiddleware     = require('./middlewares/auth-token');
+let applicationMiddleware   = require('./middlewares/application');
+let accountRoutes           = require('./routes/account');
+let userRoutes              = require('./routes/user');
+let candidateRoutes         = require('./routes/candidate');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,6 +33,7 @@ app.use(require('node-sass-middleware')({
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // Set security middleware
+app.use(applicationMiddleware);
 app.use(authTokenMiddleware);
 
 // CORS and other header options
@@ -39,9 +45,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/account', require('./routes/account'));
-app.use('/api/user', require('./routes/user'));
-app.use('/api/candidate', require('./routes/candidate'));
+app.use('/api/account', accountRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/candidate', candidateRoutes);
 
 // catch 404 and send frontend app
 app.use((req, res, next) => {

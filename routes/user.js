@@ -15,14 +15,6 @@ router.get('/', (req, res, next)    => {
     User.find().then((user) => res.send(user)).catch((e) => res.status(400).send(e))
 });
 
-// Get user
-router.get('/:id', (req, res, next) => {
-    let id = req.params.id;
-    if(!ObjectID.isValid(id)) res.status(400).send();
-
-    User.findById(id).then((user) => res.send(user)).catch((e) => res.status(400).send(e));
-});
-
 // Create user
 router.post('/', (req, res, next) => {
 
@@ -32,24 +24,9 @@ router.post('/', (req, res, next) => {
     user.save().then((doc) => res.send(doc)).catch((e) => res.status(400).send(e));
 });
 
-// Update user
-router.patch('/:id', (req, res, next) => {
-
-    let id      = req.params.id;
-    let body    = _.pick(req.body, ['firstname', 'lastname', 'email', 'birthdate', 'phone', 'availableAt', 'availableUntil']);
-
-    if(!ObjectID.isValid(id)) res.status(400).send();
-
-    User.findByIdAndUpdate(id, { $set : body }, { new : true }).then((user) => res.send(user)).catch((e) => res.status(400).send(e));
-});
-
-// Delete user
-router.delete('/:id', (req, res, next) => {
-
-    let id = req.params.id;
-    if(!ObjectID.isValid(id)) res.status(400).send();
-
-    User.findByIdAndRemove(id).then((user) => res.send(user)).catch((e) => res.status(400).send());
+router.delete('/logout', (req, res, next) => {
+    res.removeHeader('X-Auth-Token');
+    res.send();
 });
 
 router.post('/login', (req, res, next) => {
@@ -80,14 +57,7 @@ router.post('/login', (req, res, next) => {
                 res.status(401).send({ error : 'user_not_found' });
             }
         }).
-        catch((e) => res.status(401).send(e));
-});
-
-
-
-router.delete('/logout', (req, res, next) => {
-    console.log("llll");
-    res.send({});
+    catch((e) => res.status(401).send(e));
 });
 
 router.post('/forgot-password', (req, res, next) => {
@@ -95,24 +65,24 @@ router.post('/forgot-password', (req, res, next) => {
     // Find user with given email
     User.findOne({ email : req.body.email }).then((user) => {
         // User found
-       if(user) {
-           // Check last time user requested forgot-password
-           let now                  = time();
-           let requestePasswordAt   = user.requestPasswordAt ? user.requestPasswordAt.getTime() : time();
+        if(user) {
+            // Check last time user requested forgot-password
+            let now                  = time();
+            let requestePasswordAt   = user.requestPasswordAt ? user.requestPasswordAt.getTime() : time();
 
-           // If forgot-password requested in the last 24 hours
-           if(now - requestePasswordAt <= (24 * 60 * 60)) {
+            // If forgot-password requested in the last 24 hours
+            if(now - requestePasswordAt <= (24 * 60 * 60)) {
                 res.send(400).send({ error : 'password_already_requested' });
-           }
-           else {
-               user.requestPasswordAt = new Date();
-               user.token = crypto.randomBytes(32).toString('hex');
-               return user.save();
-           }
-       }
-       else {
+            }
+            else {
+                user.requestPasswordAt = new Date();
+                user.token = crypto.randomBytes(32).toString('hex');
+                return user.save();
+            }
+        }
+        else {
             res.status(400).send({ error : 'user_not_found' });
-       }
+        }
     })
     .then((user) => {
         res.render('reset-password', { user : user }, (html, error) => {
@@ -147,6 +117,34 @@ router.post('/reset-password/:token', (req, res, next) => {
         res.send(user.toJSON());
     })
     .catch((e) => res.status(400).send(e));
+});
+
+// Get user
+router.get('/:id', (req, res, next) => {
+    let id = req.params.id;
+    if(!ObjectID.isValid(id)) res.status(400).send();
+
+    User.findById(id).then((user) => res.send(user)).catch((e) => res.status(400).send(e));
+});
+
+// Update user
+router.patch('/:id', (req, res, next) => {
+
+    let id      = req.params.id;
+    let body    = _.pick(req.body, ['firstname', 'lastname', 'email', 'birthdate', 'phone', 'availableAt', 'availableUntil']);
+
+    if(!ObjectID.isValid(id)) res.status(400).send();
+
+    User.findByIdAndUpdate(id, { $set : body }, { new : true }).then((user) => res.send(user)).catch((e) => res.status(400).send(e));
+});
+
+// Delete user
+router.delete('/:id', (req, res, next) => {
+
+    let id = req.params.id;
+    if(!ObjectID.isValid(id)) res.status(400).send();
+
+    User.findByIdAndRemove(id).then((user) => res.send(user)).catch((e) => res.status(400).send());
 });
 
 module.exports = router;

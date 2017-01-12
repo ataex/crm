@@ -29,6 +29,7 @@ router.post('/', (req, res, next) => {
 // Update candidate
 router.patch('/:id', (req, res, next) => {
 
+    // @todo, find document, access control
     let id      = req.params.id;
     let body    = _.pick(req.body, ['firstname', 'lastname', 'email', 'birthdate', 'phone', 'availableAt', 'availableUntil']);
 
