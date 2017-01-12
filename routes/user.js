@@ -9,6 +9,7 @@ let config          = require('./../config/config');
 let bcrypt          = require('bcryptjs');
 let jwt             = require('jsonwebtoken');
 
+
 // Get all users
 router.get('/', (req, res, next)    => {
     User.find().then((user) => res.send(user)).catch((e) => res.status(400).send(e))
@@ -80,6 +81,13 @@ router.post('/login', (req, res, next) => {
             }
         }).
         catch((e) => res.status(401).send(e));
+});
+
+
+
+router.delete('/logout', (req, res, next) => {
+    console.log("llll");
+    res.send({});
 });
 
 router.post('/forgot-password', (req, res, next) => {

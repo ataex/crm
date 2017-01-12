@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
             else {
                 // Already set token in response
                 res.header({ 'X-Auth-Token' : XAuthToken });
-                // Get User and set to request so we can use it later on
+                // Get User and set to request so we can use it later
                 User.findById(userData.id).populate('_account').then(user => {
                     if(user) req.user = user;
                     else res.status(403).send();

@@ -25,7 +25,11 @@ export class SecurityService {
         return headers;
     }
 
-    private getAuthToken() {
+    getAuthToken() {
         return localStorage.getItem('X-Auth-Token');
+    }
+
+    deleteAuthToken() {
+        return localStorage.removeItem('X-Auth-Token');
     }
 }
