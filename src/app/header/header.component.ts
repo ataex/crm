@@ -14,7 +14,6 @@ export class HeaderComponent implements OnInit {
     constructor(private securityService: SecurityService, private router: Router) {}
 
     ngOnInit() {
-
         this.router.events.subscribe((event) => {
             if(event instanceof NavigationEnd) {
                 this.isLogged = this.securityService.isLogged();

@@ -37,6 +37,7 @@ router.post('/login', (req, res, next) => {
 
     // Get user with email
     User.findOne({ email : data.email })
+        .populate('_account')
         .then((user) => {
             // If user found
             if(user) {
@@ -45,7 +46,8 @@ router.post('/login', (req, res, next) => {
                     // If password is valid
                     if(result) {
                         // Create token
-                        let token = jwt.sign({ id : user._id }, config.secret);
+                        let name    = user.firstname && user.lastname ? user.firstname+' '+user.lastname : user._account.name;
+                        let token = jwt.sign({ id : user._id, name }, config.secret);
                         res.header({ 'X-Auth-Token' : token }).send();
                     }
                     else {
