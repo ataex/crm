@@ -34,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Set security middleware
 app.use(applicationMiddleware);
+
 app.use(authTokenMiddleware);
 
 // CORS and other header options

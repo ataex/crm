@@ -6,6 +6,7 @@ let _                       = require('lodash');
 
 // Get all candidates
 router.get('/', (req, res, next)    => {
+
     Candidate.find({ _account : req.user._account }).then(candidates => res.send(candidates)).catch(e => res.status(400).send(e));
 });
 
@@ -28,7 +29,7 @@ router.post('/', (req, res, next) => {
 // Update candidate
 router.patch('/:id', (req, res, next) => {
 
-    let id      = req.params.id;
+    let id = req.params.id;
 
     if(!ObjectID.isValid(id)) res.status(400).send();
 
