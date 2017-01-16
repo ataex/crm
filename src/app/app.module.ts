@@ -21,6 +21,10 @@ import { ResetPasswordComponent } from './authentication/reset-password/reset-pa
 import { SecurityService } from './shared/security.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LogoutComponent } from './authentication/logout/logout.component';
+import { UserCreateComponent } from './user/user-create/user-create.component';
+import { UserFormComponent } from './user/user-form/user-form.component';
+import { UserListComponent } from './user/user-list/user-list.component';
+import { UserUpdateComponent } from './user/user-update/user-update.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,11 @@ import { LogoutComponent } from './authentication/logout/logout.component';
     ForgotPasswordComponent,
     ResetPasswordComponent,
     DashboardComponent,
-    LogoutComponent
+    LogoutComponent,
+    UserCreateComponent,
+    UserFormComponent,
+    UserListComponent,
+    UserUpdateComponent
   ],
   imports: [
     BrowserModule,
