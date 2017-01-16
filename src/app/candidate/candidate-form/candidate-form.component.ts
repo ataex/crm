@@ -11,7 +11,7 @@ export class CandidateFormComponent implements OnInit {
 
     candidateForm: FormGroup;
     @Input() candidate: any = {};
-    @Output() onSubmitted = new EventEmitter();
+    @Output() submitted = new EventEmitter();
 
     constructor(private formBuilder: FormBuilder) {}
 
@@ -23,15 +23,15 @@ export class CandidateFormComponent implements OnInit {
         });
     }
 
-        ngOnChanges(changes) {
-            let candidate = changes.candidate.currentValue;
+    ngOnChanges(changes) {
+        let candidate = changes.candidate.currentValue;
 
-            if(!_.isEmpty(candidate)) {
-                this.candidateForm.patchValue(candidate);
-            }
+        if(!_.isEmpty(candidate)) {
+            this.candidateForm.patchValue(candidate);
         }
+    }
 
     onSubmit() {
-        this.onSubmitted.emit(this.candidateForm.value);
+        this.submitted.emit(this.candidateForm.value);
     }
 }

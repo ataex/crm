@@ -1,3 +1,5 @@
-<p>
-  user-list works!
-</p>
+<a [routerLink]="['/user/create']">Create user</a>
+
+<div *ngFor="let user of users">
+    {{ user._id }} {{ user.firstname }} {{ user.lastname }} <a [routerLink]="['/user/update/', user._id]">Update user</a>
+</div>

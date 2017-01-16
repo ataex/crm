@@ -22,7 +22,7 @@ export class CandidateUpdateComponent implements OnInit {
     });
   }
 
-  onSubmitted(candidate) {
+  onSubmit(candidate) {
     this.candidateService.updateCandidate(this.candidateId, candidate).subscribe((candidate) => {
       console.log(candidate);
     });

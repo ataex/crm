@@ -1,3 +1,10 @@
-<p>
-  user-form works!
-</p>
+<form formGroup="userForm" (submit)="onSubmit()">
+
+    <input type="text" formControl="firstname">
+    <input type="text" formControl="lastname">
+    <input type="text" formControl="email">
+    <input type="text" formControl="password">
+
+    <input type="submit" value="Create">
+
+</form>

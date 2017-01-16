@@ -17,7 +17,7 @@ export class CandidateCreateComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmitted(candidate) {
+  onSubmit(candidate) {
     this.candidateService.createCandidate(candidate).subscribe((candidate) => {
       this.router.navigateByUrl('/candidate/update/' + candidate._id);
       console.log(candidate);

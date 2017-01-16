@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-user-form',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserFormComponent implements OnInit {
 
-  constructor() { }
+    userForm: FormGroup;
+    @Input() user = {};
+    @Output() submitted = new EventEmitter;
 
-  ngOnInit() {
-  }
+    constructor(private formBuilder: FormBuilder) { }
+
+    ngOnInit() {
+        this.userForm = this.formBuilder.group({
+            firstname : ['', Validators.required],
+            lastname : ['', Validators.required],
+            email : ['', Validators.required],
+            password : ['', Validators.required]
+        })
+    }
+
+    ngOnChanges(changes) {
+        let user = changes.user.currentValue;
+
+        if(!_.isEmpty(user)) {
+            this.userForm.patchValue(user);
+        }
+    }
+
+    onSubmit() {
+        this.submitted.emit(this.userForm.value);
+    }
 
 }

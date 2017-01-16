@@ -12,4 +12,8 @@ export class UserCreateComponent implements OnInit {
   ngOnInit() {
   }
 
+  onSubmit(candidate) {
+      console.log(candidate);
+  }
+
 }

@@ -8,7 +8,7 @@ import { SecurityService } from '../shared/security.service';
 export class CandidateService {
 
   private candidateUrl = environment.baseUrl + 'api/candidate';
-  private securityRequestOptions;
+  private securityRequestOptions = {};
 
   constructor(private http: Http, private securityService: SecurityService) {
       this.securityRequestOptions = this.securityService.getRequestOptions();
