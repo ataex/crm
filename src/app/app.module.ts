@@ -20,7 +20,6 @@ import { ForgotPasswordComponent } from './authentication/forgot-password/forgot
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
 import { SecurityService } from './shared/security.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { LogoutComponent } from './authentication/logout/logout.component';
 import { UserCreateComponent } from './user/user-create/user-create.component';
 import { UserFormComponent } from './user/user-form/user-form.component';
 import { UserListComponent } from './user/user-list/user-list.component';
@@ -41,7 +40,6 @@ import { UserUpdateComponent } from './user/user-update/user-update.component';
     ForgotPasswordComponent,
     ResetPasswordComponent,
     DashboardComponent,
-    LogoutComponent,
     UserCreateComponent,
     UserFormComponent,
     UserListComponent,
@@ -54,7 +52,7 @@ import { UserUpdateComponent } from './user/user-update/user-update.component';
     RoutingModule,
     MaterialModule.forRoot()
   ],
-  providers: [SecurityService],
-  bootstrap: [AppComponent]
+  providers: [ SecurityService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

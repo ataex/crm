@@ -1,7 +1,8 @@
 <ul>
-    <li *ngIf="isLogged"><a [routerLink]="['candidates']">Candidates</a></li>
-    <li *ngIf="isLogged"><a [routerLink]="['jobs']">Jobs</a></li>
     <li *ngIf="!isLogged"><a [routerLink]="['register']">Register</a></li>
     <li *ngIf="!isLogged"><a [routerLink]="['login']">Login</a></li>
-    <li *ngIf="isLogged"><app-logout></app-logout></li>
+    <li *ngIf="isLogged"><a [routerLink]="['candidates']">Candidates</a></li>
+    <li *ngIf="isLogged"><a [routerLink]="['users']">Users</a></li>
+    <li *ngIf="isLogged"><a [routerLink]="['jobs']">Jobs</a></li>
+    <li *ngIf="isLogged"><a [routerLink]="['']" (click)="logout()">Logout</a></li>
 </ul>
