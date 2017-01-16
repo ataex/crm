@@ -1,7 +1,7 @@
 const mongoose  = require('mongoose');
 const Schema    = mongoose.Schema;
 
-let UserType = mongoose.model('UserType', {
+let userTypeSchema = new Schema({
 
     slug : {
         type: String,
@@ -15,4 +15,5 @@ let UserType = mongoose.model('UserType', {
     }
 });
 
+let UserType = mongoose.model('UserType', userTypeSchema);
 module.exports = UserType;

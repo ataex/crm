@@ -12,16 +12,51 @@ let jwt             = require('jsonwebtoken');
 
 // Get all users
 router.get('/', (req, res, next)    => {
-    User.find().then((user) => res.send(user)).catch((e) => res.status(400).send(e))
+    User.find({ _account : req.user._account })
+        .then(users => res.send(users))
+        .catch(e => res.status(400).send(e));
 });
 
-// Create user
+// Get a user
+router.get('/:id', (req, res, next) => {
+    let id = req.params.id;
+    if(!ObjectID.isValid(id)) res.status(400).send();
+    User.findOne({ _id : id, _account : req.user._account }).then(candidate => res.send(candidate.toJSON())).catch(e => res.status(400).send(e));
+});
+
+// Create a user
 router.post('/', (req, res, next) => {
 
-    let user        = new User(req.body);
-    user._account   = accountId;
+    let body            = _.pick(req.body, ['firstname', 'lastname', 'email', 'phone', 'type']);
+    let user            = new User(body);
+    candidate._account  = req.user._account;
 
-    user.save().then((doc) => res.send(doc)).catch((e) => res.status(400).send(e));
+    user.save().then(user => res.send(user.toJSON())).catch(e => res.status(400).send(e));
+});
+
+// Update a user
+router.patch('/:id', (req, res, next) => {
+
+    let id = req.params.id;
+
+    if(!ObjectID.isValid(id)) res.status(400).send();
+
+    User.findById(id)
+        .then((user) => {
+
+            if(!user) res.status(400).send();
+            if(user._account.toString() != req.user._account._id.toString()) {
+                res.status(403).send();
+            }
+
+            let body = _.pick(req.body, ['firstname', 'lastname', 'email', 'phone']);
+
+            user.save();
+
+            return User.findByIdAndUpdate(id, { $set : body }, { new : true });
+        })
+        .then(candidate => res.send(candidate.toJSON()))
+        .catch(e => res.status(400).send(e));
 });
 
 router.delete('/logout', (req, res, next) => {
@@ -119,25 +154,6 @@ router.post('/reset-password/:token', (req, res, next) => {
         res.send(user.toJSON());
     })
     .catch((e) => res.status(400).send(e));
-});
-
-// Get user
-router.get('/:id', (req, res, next) => {
-    let id = req.params.id;
-    if(!ObjectID.isValid(id)) res.status(400).send();
-
-    User.findById(id).then((user) => res.send(user)).catch((e) => res.status(400).send(e));
-});
-
-// Update user
-router.patch('/:id', (req, res, next) => {
-
-    let id      = req.params.id;
-    let body    = _.pick(req.body, ['firstname', 'lastname', 'email', 'birthdate', 'phone', 'availableAt', 'availableUntil']);
-
-    if(!ObjectID.isValid(id)) res.status(400).send();
-
-    User.findByIdAndUpdate(id, { $set : body }, { new : true }).then((user) => res.send(user)).catch((e) => res.status(400).send(e));
 });
 
 // Delete user
