@@ -19,7 +19,8 @@ export class AccountService {
     }
 
     private extractData(res: Response) {
-        return res.json();
+        let body = res.json();
+        return res.json() || {};
     }
 
     private handleError (error: Response | any) {

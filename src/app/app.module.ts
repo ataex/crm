@@ -13,14 +13,14 @@ import { CandidateListComponent } from './candidate/candidate-list/candidate-lis
 import { CandidateCreateComponent } from './candidate/candidate-create/candidate-create.component';
 import { CandidateUpdateComponent } from './candidate/candidate-update/candidate-update.component';
 import { CandidateFormComponent } from './candidate/candidate-form/candidate-form.component';
-import { RegisterComponent } from './account/register/register.component';
-import { ActivateComponent } from './account/activate/activate.component';
-import { LoginComponent } from './user/login/login.component';
-import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './user/reset-password/reset-password.component';
+import { RegisterComponent } from './authentication/register/register.component';
+import { ActivateComponent } from './authentication/activate/activate.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { ForgotPasswordComponent } from './authentication/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
 import { SecurityService } from './shared/security.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { LogoutComponent } from './user/logout/logout.component';
+import { LogoutComponent } from './authentication/logout/logout.component';
 
 @NgModule({
   declarations: [

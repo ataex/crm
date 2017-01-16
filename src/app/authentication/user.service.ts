@@ -7,7 +7,7 @@ import { SecurityService } from '../shared/security.service';
 @Injectable()
 export class UserService {
 
-    private userUrl = environment.baseUrl + 'api/user';
+    private userUrl = environment.baseUrl + 'api/authentication';
     private securityRequestOptions;
 
     constructor(private http: Http, private securityService: SecurityService) {
@@ -23,7 +23,8 @@ export class UserService {
     }
 
     private extractData(res: Response) {
-        return res.json();
+        let body = res.json();
+        return body || {};
     }
 
     private handleError (error: Response | any) {

@@ -11,6 +11,7 @@ let applicationMiddleware   = require('./middlewares/application');
 let accountRoutes           = require('./routes/account');
 let userRoutes              = require('./routes/user');
 let candidateRoutes         = require('./routes/candidate');
+let authenticationRoutes    = require('./routes/authentication');
 
 
 // view engine setup
@@ -34,7 +35,6 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Set security middleware
 app.use(applicationMiddleware);
-
 app.use(authTokenMiddleware);
 
 // CORS and other header options
@@ -47,6 +47,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/account', accountRoutes);
+app.use('/api/authentication', authenticationRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/candidate', candidateRoutes);
 

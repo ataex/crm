@@ -4,9 +4,9 @@ import { HomeComponent } from './home/home.component';
 import { CandidateListComponent } from './candidate/candidate-list/candidate-list.component';
 import { CandidateCreateComponent } from './candidate/candidate-create/candidate-create.component';
 import { CandidateUpdateComponent } from './candidate/candidate-update/candidate-update.component';
-import { RegisterComponent } from './account/register/register.component';
-import { ActivateComponent } from './account/activate/activate.component';
-import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './authentication/register/register.component';
+import { ActivateComponent } from './authentication/activate/activate.component';
+import { LoginComponent } from './authentication/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 
@@ -21,6 +21,7 @@ const routes: Routes = [
     { path : 'login', component : LoginComponent },
     { path : 'dashboard', component : DashboardComponent }
 ];
+
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
