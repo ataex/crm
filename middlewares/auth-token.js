@@ -23,11 +23,13 @@ module.exports = (req, res, next) => {
                 // Already set token in response
                 res.setHeader('X-Auth-Token',  XAuthToken);
                 // Get User and set to request so we can use it later
-                User.findById(userData.id).populate('_account').then(user => {
-                    if(user) req.user = user;
-                    else res.status(403).send({ error : 'access_denied' });
-                    next();
-                }).catch(e => console.log(e));
+                User
+                    .findById(userData.id).populate('_account').then(user => {
+                        if(user) req.user = user;
+                        else res.status(403).send({ error : 'access_denied' });
+                        next();
+                    })
+                    .catch(e => res.status(403).send({ error : 'access_denied' }));
             }
         });
     }

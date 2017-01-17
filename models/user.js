@@ -41,9 +41,8 @@ let userSchema = new Schema({
         type : Schema.ObjectId,
         ref : 'Agency'
     },
-    _type : {
-        type : String,
-        ref : 'UserType'
+    type : {
+        type : String
     }
 });
 

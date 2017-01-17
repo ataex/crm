@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from "../account.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-register-form',
@@ -11,9 +12,8 @@ import { AccountService } from "../account.service";
 export class RegisterComponent implements OnInit {
 
     registerForm: FormGroup;
-    registeredMessage: String;
 
-    constructor(private formBuilder: FormBuilder, private accountService: AccountService) { }
+    constructor(private formBuilder: FormBuilder, private accountService: AccountService, private router: Router) { }
 
     ngOnInit() {
 
@@ -28,7 +28,8 @@ export class RegisterComponent implements OnInit {
     onSubmit() {
         let account = this.registerForm.value;
         this.accountService.register(account).subscribe((response) => {
-            this.registeredMessage = response.message;
+            sessionStorage.setItem('accountCreated', '1');
+            this.router.navigateByUrl('/login');
         });
     }
 

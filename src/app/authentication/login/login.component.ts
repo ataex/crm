@@ -37,6 +37,11 @@ export class LoginComponent implements OnInit {
         this.activatedRoute.queryParams.subscribe((queryParams) => {
             this.queryParams = queryParams;
         });
+
+        if(sessionStorage.getItem('accountCreated')) {
+            this.loginMessage = 'You are now registered, please check your email and confirm your account.';
+            sessionStorage.removeItem('accountCreated');
+        }
     }
 
     onSubmit() {

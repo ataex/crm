@@ -29,7 +29,7 @@ router.post('/register', (req, res, next) => {
         subscriptionSaved = subscription;
         // Create amin user
         let user = new User({
-            _type : 'admin',
+            type : 'owner',
             _account : accountSaved._id,
             email : req.body.email,
             password : req.body.password

@@ -1,6 +1,5 @@
 class Security {
-    checkModel(req, res, model){
-
+    checkModel(req, model){
         return new Promise((resolve, reject) => {
             if(model._account.toString() != req.user._account._id.toString()) {
                 reject({ error : 'document_access_denied' });

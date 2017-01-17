@@ -32,8 +32,8 @@ export class UserUpdateComponent implements OnInit {
     }
 
     onSubmit(user) {
-        this.userService.updateUser(this.user.id, user).subscribe(user => {
-            this.userUpdatedMessage =`User${user.firstname} ${user.lastname} has been updated`;
+        this.userService.updateUser(this.user._id, user).subscribe(user => {
+            this.userUpdatedMessage =`User ${user.firstname} ${user.lastname} has been updated`;
         });
     }
 

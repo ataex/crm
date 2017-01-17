@@ -21,7 +21,7 @@ router.get('/:id', (req, res, next) => {
     Candidate
         .findById(id).then(candidate => {
             if(!candidate) res.status(400).send({ error : 'document_not_found' });
-            return security.checkModel(req, res, candidate);
+            return security.checkModel(req, candidate);
         })
         .then(candidate => res.send(candidate.toJSON()), error => res.status(403).send(error))
         .catch(e => res.status(400).send(e));
@@ -47,7 +47,7 @@ router.patch('/:id', (req, res, next) => {
     Candidate.findById(id)
         .then((candidate) => {
             if(!candidate) res.status(400).send({ error : 'document_not_found' });
-            return security.checkModel(req, res, candidate);
+            return security.checkModel(req, candidate);
         })
         .then(
             candidate => {
@@ -73,7 +73,7 @@ router.delete('/:id', (req, res, next) => {
         .findById(id)
         .then(candidate => {
             if(!candidate) res.status(400).send({ error : 'document_not_found' });
-            return security.checkModel(req, res, candidate);
+            return security.checkModel(req, candidate);
         })
         .then(
             candidate => {

@@ -16,8 +16,9 @@ export class UserCreateComponent implements OnInit {
 
     onSubmit(user) {
         this.userService.createUser(user).subscribe(user => {
+            console.log(user);
             sessionStorage.setItem('userCreated', '1');
-            this.router.navigateByUrl('/user/update' + user.id);
+            this.router.navigateByUrl('/user/update/' + user._id);
         });
     }
 
