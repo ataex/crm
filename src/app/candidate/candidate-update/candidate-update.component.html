@@ -1,2 +1,4 @@
 <a [routerLink]="['/candidates']">Back to candidates list</a>
 <app-candidate-form [candidate]="candidate" (submitted)="onSubmit($event)"></app-candidate-form>
+<p *ngIf="candidateUpdateMessage">{{ candidateUpdateMessage }}</p>
+<p *ngIf="candidateCreateMessage">{{ candidateCreateMessage }}</p>

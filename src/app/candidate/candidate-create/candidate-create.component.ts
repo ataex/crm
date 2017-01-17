@@ -10,18 +10,17 @@ import { Router } from "@angular/router";
 })
 export class CandidateCreateComponent implements OnInit {
 
-  private candidate: any = {};
+    private candidate: any = {};
 
-  constructor(private candidateService: CandidateService, private router: Router) { }
+    constructor(private candidateService: CandidateService, private router: Router) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {}
 
-  onSubmit(candidate) {
-    this.candidateService.createCandidate(candidate).subscribe((candidate) => {
-      this.router.navigateByUrl('/candidate/update/' + candidate._id);
-      console.log(candidate);
-    });
-  }
+    onSubmit(candidate) {
+        this.candidateService.createCandidate(candidate).subscribe((candidate) => {
+            sessionStorage.setItem('candidateCreated', '1');
+            this.router.navigateByUrl('/candidate/update/' + candidate._id);
+        });
+    }
 
 }
