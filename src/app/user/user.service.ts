@@ -22,8 +22,8 @@ export class UserService {
         return this.http.get(this.userUrl + '/' + id, this.securityRequestOptions).map(this.extractData).catch(this.handleError);
     }
 
-    createUser() {
-        return this.http.post(this.userUrl, this.securityRequestOptions).map(this.extractData).catch(this.handleError);
+    createUser(user) {
+        return this.http.post(this.userUrl, user, this.securityRequestOptions).map(this.extractData).catch(this.handleError);
     }
 
     updateUser(id, user) {

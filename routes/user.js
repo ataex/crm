@@ -6,7 +6,6 @@ let _               = require('lodash');
 
 // Get all users
 router.get('/', (req, res, next)    => {
-
     User.find({ _account : req.user._account })
         .then(users => res.send(users))
         .catch(e => res.status(400).send(e));

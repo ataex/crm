@@ -1,10 +1,7 @@
-<form formGroup="userForm" (submit)="onSubmit()">
-
-    <input type="text" formControl="firstname">
-    <input type="text" formControl="lastname">
-    <input type="text" formControl="email">
-    <input type="text" formControl="password">
-
+<form [formGroup]="userForm" (submit)="onSubmit()">
+    <input type="text" formControlName="firstname" placeholder="Firstname">
+    <input type="text" formControlName="lastname" placeholder="Lastname">
+    <input type="text" formControlName="email" placeholder="Email">
+    <input type="password" formControlName="password" placeholder="Password">
     <input type="submit" value="Create">
-
 </form>

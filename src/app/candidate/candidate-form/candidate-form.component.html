@@ -1,12 +1,6 @@
 <form [formGroup]="candidateForm" (submit)="onSubmit()">
-    <label>Firstname:</label>
-    <input type="text" formControlName="firstname">
-
-    <label>Lastname:</label>
-    <input type="text" formControlName="lastname">
-
-    <label>Email:</label>
-    <input type="text" formControlName="email">
-
+    <input type="text" formControlName="firstname" placeholder="Firstname">
+    <input type="text" formControlName="lastname" placeholder="Lastname">
+    <input type="text" formControlName="email" placeholder="Email">
     <button type="submit">Submit</button>
 </form>
