@@ -28,7 +28,7 @@ router.get('/:id', (req, res, next) => {
 // Create a user
 router.post('/', (req, res, next) => {
 
-    let body            = _.pick(req.body, ['firstname', 'lastname', 'email', 'phone']);
+    let body            = _.pick(req.body, ['firstname', 'lastname', 'email', 'phone', 'password']);
     let user       = new User(body);
     user._account  = req.user._account;
 

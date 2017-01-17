@@ -12,15 +12,15 @@ export class CandidateUpdateComponent implements OnInit {
 
     private candidate: any = {};
     private candidateId: String;
-    private candidateUpdateMessage: String;
-    private candidateCreateMessage: String;
+    private candidateUpdatedMessage: String;
+    private candidateCreatedMessage: String;
 
     constructor(private candidateService: CandidateService, private activatedRoute: ActivatedRoute) { }
 
     ngOnInit() {
         let candidateCreated = sessionStorage.getItem('candidateCreated');
         if(candidateCreated) {
-            this.candidateCreateMessage = 'Candidate has been created';
+            this.candidateCreatedMessage = 'Candidate has been created';
             sessionStorage.removeItem('candidateCreated');
         }
 
@@ -32,7 +32,7 @@ export class CandidateUpdateComponent implements OnInit {
 
     onSubmit(candidate) {
         this.candidateService.updateCandidate(this.candidateId, candidate).subscribe((candidate) => {
-            this.candidateUpdateMessage = 'Candidate has been updated';
+            this.candidateUpdatedMessage = 'Candidate has been updated';
         });
     }
 
