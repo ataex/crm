@@ -8,7 +8,7 @@ let _               = require('lodash');
 router.get('/', (req, res, next)    => {
 
     User.find({ _account : req.user._account })
-        .then(candidates => res.send(candidates))
+        .then(users => res.send(users))
         .catch(e => res.status(400).send(e));
 });
 
@@ -44,7 +44,7 @@ router.patch('/:id', (req, res, next) => {
     if(!ObjectID.isValid(id)) res.status(400).send({ error : 'object_id_not_valid' });
 
     User.findById(id)
-        .then((canduseridate) => {
+        .then((user) => {
             if(!user) res.status(400).send({ error : 'document_not_found' });
             return security.checkModel(req, res, user);
         })

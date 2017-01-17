@@ -6,7 +6,7 @@ Run npm install, it will install all dependencies for both backend and frontend.
 ## Backend
 Run npm start, start mongod (mongod --dbpath=/Users/[username]/mongo-data/).
 Navigate to `http://localhost:3000/[definedRoute]` with Postman to view data sent by the API.
-Check database with Robomongo or WebStorm/PHPStorm with MongoDB plugin.
+Check database with Robomongo, MongoDB Compass or WebStorm/PHPStorm with MongoDB plugin.
 
 ## Frontend
 Run ng serve or any other Angular CLI commands.
