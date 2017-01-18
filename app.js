@@ -33,10 +33,6 @@ app.use(require('node-sass-middleware')({
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Set security middleware
-app.use(applicationMiddleware);
-app.use(authTokenMiddleware);
-
 // CORS and other header options
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -56,6 +52,10 @@ app.use((req, res, next) => {
     indexFile = __dirname+'/dist/index.html';
     res.sendFile(indexFile);
 });
+
+// Set security middleware
+app.use(applicationMiddleware);
+app.use(authTokenMiddleware);
 
 // error handler
 app.use((err, req, res, next) => {
