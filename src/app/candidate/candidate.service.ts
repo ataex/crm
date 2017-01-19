@@ -31,7 +31,7 @@ export class CandidateService {
   }
 
   deleteCandidate(id) {
-    return this.http.delete(this.candidateUrl + '/' + id).map(this.extractData).catch(this.handleError);
+    return this.http.delete(this.candidateUrl + '/' + id, this.securityRequestOptions).map(this.extractData).catch(this.handleError);
   }
 
   private extractData(res: Response) {

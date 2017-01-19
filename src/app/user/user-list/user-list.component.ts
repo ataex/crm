@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../user.service";
-import * as _ from 'lodash';
 
 @Component({
     selector: 'app-user-list',
@@ -21,9 +20,8 @@ export class UserListComponent implements OnInit {
     }
 
     deleteUser(user) {
-        let displayedUser = user;
         this.userService.deleteUser(user._id).subscribe((user) => {
-            _.pull(this.users, displayedUser);
+            this.users.splice(this.users.indexOf(user, 1));
         });
     }
 

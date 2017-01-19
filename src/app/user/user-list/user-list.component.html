@@ -3,5 +3,5 @@
 <div *ngFor="let user of users">
     {{ user._id }} {{ user.firstname }} {{ user.lastname }}
     <a [routerLink]="['/user/update/', user._id]">Update user</a>
-    <a [routerLink]="['']" (click)="deleteUser(user)">Delete user</a>
+    <a (click)="deleteUser(user)">Delete user</a>
 </div>

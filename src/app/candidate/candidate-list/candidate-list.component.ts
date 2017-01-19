@@ -20,5 +20,11 @@ export class CandidateListComponent implements OnInit {
     );
   }
 
+  deleteCandidate(candidate) {
+      this.candidateService.deleteCandidate(candidate._id).subscribe(candidate => {
+          this.candidates.splice(candidate, 1);
+      })
+  }
+
 
 }

@@ -4,5 +4,5 @@
     <li *ngIf="isLogged"><a [routerLink]="['candidates']">Candidates</a></li>
     <li *ngIf="isLogged"><a [routerLink]="['users']">Users</a></li>
     <li *ngIf="isLogged"><a [routerLink]="['jobs']">Jobs</a></li>
-    <li *ngIf="isLogged"><a [routerLink]="['']" (click)="logout()">Logout</a></li>
+    <li *ngIf="isLogged"><a (click)="logout()">Logout</a></li>
 </ul>

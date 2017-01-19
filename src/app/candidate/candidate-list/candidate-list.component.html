@@ -1,5 +1,7 @@
 <a [routerLink]="['/candidate/create']">Create candidate</a>
 
 <div *ngFor="let candidate of candidates">
-    {{ candidate._id }} {{ candidate.firstname }} {{ candidate.lastname }} <a [routerLink]="['/candidate/update/', candidate._id]">Update candidate</a>
+    {{ candidate._id }} {{ candidate.firstname }} {{ candidate.lastname }}
+    <a [routerLink]="['/candidate/update/', candidate._id]">Update candidate</a>
+    <a (click)="deleteCandidate(candidate)">Delete Candidate</a>
 </div>
