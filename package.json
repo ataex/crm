@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
     "@types/lodash": "4.14.44",
+    "@types/socket.io-client": "1.4.29",
     "bcryptjs": "2.4.0",
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
@@ -41,6 +42,7 @@
     "sendgrid": "4.7.1",
     "serve-favicon": "~2.3.0",
     "socket.io": "1.7.2",
+    "socket.io-client": "1.7.2",
     "stripe": "4.14.0",
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.7.2"
