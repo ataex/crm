@@ -51,6 +51,7 @@ app.use('/api/authentication', authenticationRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/candidate', candidateRoutes);
 
+// Application delivery and api not found handler
 app.use((req, res, next) => {
     if(req.isApi) {
         res.status(404).send({ error : 'api_not_found' });
