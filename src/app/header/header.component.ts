@@ -33,7 +33,8 @@ export class HeaderComponent implements OnInit {
 
             if(!authToken) {
                 securityService.deleteAuthToken();
-                this.router.navigate(['/login'], { queryParams : { logged_out : 1 }})
+                sessionStorage.setItem('userLoggedOut', '1');
+                this.router.navigate(['/login']);
             }
         });
     }

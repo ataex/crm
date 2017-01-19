@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../user.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 import { SecurityService } from '../../shared/security.service';
 
@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
     constructor(
       private formBuilder: FormBuilder,
       private userService: UserService,
-      private activatedRoute: ActivatedRoute,
       private router: Router,
       private securityService: SecurityService
     ) { }
@@ -34,13 +33,19 @@ export class LoginComponent implements OnInit {
             password : ['', Validators.required]
         });
 
-        this.activatedRoute.queryParams.subscribe((queryParams) => {
-            this.queryParams = queryParams;
-        });
-
         if(sessionStorage.getItem('accountCreated')) {
             this.loginMessage = 'You are now registered, please check your email and confirm your account.';
             sessionStorage.removeItem('accountCreated');
+        }
+
+        if(sessionStorage.getItem('userLoggedOut')) {
+            sessionStorage.removeItem('userLoggedOut');
+            this.loginMessage = 'You are now logged out.';
+        }
+
+        if(sessionStorage.getItem('accountActivated')) {
+            sessionStorage.removeItem('accountActivated');
+            this.loginMessage = 'Your account is now active, you can login to the application';
         }
     }
 

@@ -22,7 +22,9 @@ module.exports = (req, res, next) => {
             jwt.verify(XAuthToken, config.secret, (error, decoded) => {
                 let userData = decoded;
                 // Deny access
-                if(error || _.isEmpty(userData) || !userData.id) { res.status(403).send({ error : 'access_denied' }); }
+                if(error || _.isEmpty(userData) || !userData.id) {
+                    res.status(403).send({ error : 'access_denied' });
+                }
                 // Allow Access and set environment
                 else {
                     // Already set token in response
