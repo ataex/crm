@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as socketIO from 'socket.io-client';
+declare var Notification: any;
 
 @Component({
   selector: 'app-root',
@@ -12,5 +13,9 @@ export class AppComponent implements OnInit {
         socket.on('connect', function(){});
         socket.on('event', function(data){});
         socket.on('disconnect', function(){});
+
+        Notification.requestPermission();
+        new Notification("Hi Thom");
+
     }
 }
