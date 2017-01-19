@@ -13,13 +13,12 @@ let userRoutes              = require('./routes/user');
 let candidateRoutes         = require('./routes/candidate');
 let authenticationRoutes    = require('./routes/authentication');
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -57,8 +56,7 @@ app.use((req, res, next) => {
         res.status(404).send({ error : 'api_not_found' });
     }
     else {
-        indexFile = __dirname+'/dist/index.html';
-        res.sendFile(indexFile);
+        res.sendFile(path.join(__dirname, 'dist/index.html'));
     }
 });
 
