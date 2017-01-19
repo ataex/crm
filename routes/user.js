@@ -32,6 +32,7 @@ router.post('/', (req, res, next) => {
 
     let body        = _.pick(req.body, ['firstname', 'lastname', 'email', 'phone', 'password']);
     let user        = new User(body);
+    console.log(req.user);
     user._account   = req.user._account;
 
     user.save().then(user => res.send(user.toJSON())).catch(e => res.status(400).send(e));

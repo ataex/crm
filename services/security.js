@@ -9,6 +9,14 @@ class Security {
             }
         });
     }
+
+    userIs(req, type) {
+        let user = req.user;
+
+        return new Promise((resolve, reject) => {
+            user.type == type ? resolve() : reject();
+        })
+    }
 }
 
 module.exports = new Security;
