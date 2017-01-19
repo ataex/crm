@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../user.service";
+import * as _ from 'lodash';
 
 @Component({
     selector: 'app-user-list',
@@ -19,22 +20,11 @@ export class UserListComponent implements OnInit {
         });
     }
 
-    deleteUser(id) {
-        this.userService.deleteUser(id).subscribe((user) => {
-            console.log(user);
+    deleteUser(user) {
+        let displayedUser = user;
+        this.userService.deleteUser(user._id).subscribe((user) => {
+            _.pull(this.users, displayedUser);
         });
     }
-
-    //isPartOfCollection(deletedUser) {
-    //
-    //    let isPartOfCollection = false;
-    //
-    //    this.users.foreach((user, index) => {
-    //        if(deletedUser._id == user._id) return true
-    //    });
-    //
-    //    return isPartOfCollection;
-    //
-    //}
 
 }

@@ -1,9 +1,7 @@
 <a [routerLink]="['/user/create']">Create user</a>
 
 <div *ngFor="let user of users">
-    <!--<div *ngIf="isPartOfCollection(user)">-->
-        {{ user._id }} {{ user.firstname }} {{ user.lastname }}
-        <a [routerLink]="['/user/update/', user._id]">Update user</a>
-        <a [routerLink]="['']" (click)="deleteUser(user._id)">Delete user</a>
-    <!--</div>-->
+    {{ user._id }} {{ user.firstname }} {{ user.lastname }}
+    <a [routerLink]="['/user/update/', user._id]">Update user</a>
+    <a [routerLink]="['']" (click)="deleteUser(user)">Delete user</a>
 </div>

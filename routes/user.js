@@ -32,7 +32,6 @@ router.post('/', (req, res, next) => {
 
     let body        = _.pick(req.body, ['firstname', 'lastname', 'email', 'phone', 'password']);
     let user        = new User(body);
-    console.log(req.user);
     user._account   = req.user._account;
 
     user.save().then(user => res.send(user.toJSON())).catch(e => res.status(400).send(e));
@@ -54,13 +53,13 @@ router.patch('/:id', (req, res, next) => {
             user => {
                 let body = _.pick(req.body, ['firstname', 'lastname', 'email', 'phone']);
                 Object.assign(user, body);
-                user.save();
-                res.send(user.toJSON());
+                return user.save();
             },
             error => {
                 res.status(403).send(error);
             }
         )
+        .then(user => res.send(user.toJSON()))
         .catch(e => res.status(400).send(e));
 });
 
@@ -78,12 +77,15 @@ router.delete('/:id', (req, res, next) => {
         })
         .then(
             user => {
-                user = user.remove();
+                user.remove();
                 res.send(user.toJSON());
             },
             error => res.status(403).send(error)
         )
-        .catch(e => res.status(400).send());
+        .catch(e => {
+            console.log(e);
+            res.status(400).send()
+        });
 });
 
 module.exports = router;

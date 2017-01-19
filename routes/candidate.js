@@ -53,13 +53,13 @@ router.patch('/:id', (req, res, next) => {
             candidate => {
                 let body = _.pick(req.body, ['firstname', 'lastname', 'email', 'phone']);
                 Object.assign(candidate, body);
-                candidate.save();
-                res.send(candidate.toJSON());
+                return candidate.save();
             },
             error => {
                 res.status(403).send(error);
             }
         )
+        .then(res.send(candidate.toJSON()))
         .catch(e => res.status(400).send(e));
 });
 
@@ -77,7 +77,7 @@ router.delete('/:id', (req, res, next) => {
         })
         .then(
             candidate => {
-                candidate = candidate.remove();
+                candidate.remove();
                 res.send(candidate.toJSON());
             },
             error => res.status(403).send(error)
