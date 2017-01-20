@@ -10,12 +10,14 @@ declare var Notification: any;
 export class AppComponent implements OnInit {
     ngOnInit() {
         let socket = socketIO('http://localhost:3000');
-        socket.on('connect', function(){});
-        socket.on('event', function(data){});
-        socket.on('disconnect', function(){});
+        socket.on('connect', () => {});
+        socket.on('news', (data) => {
+            console.log(data);
+        });
 
-        Notification.requestPermission();
-        new Notification("Hi Thom");
+
+        //Notification.requestPermission();
+        //new Notification("Hi Thom");
 
     }
 }

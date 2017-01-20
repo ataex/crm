@@ -22,8 +22,9 @@ app.set('port', port);
 
 var server  = http.createServer(app);
 var io      = socketIO(server);
-io.on('connection', function(){ /* … */ });
-
+io.on('connection', socket => {
+    socket.emit('news', { hello: 'world' });
+});
 
 /**
  * Listen on provided port, on all network interfaces.
