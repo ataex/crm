@@ -59,7 +59,7 @@ router.patch('/:id', (req, res, next) => {
                 res.status(403).send(error);
             }
         )
-        .then(res.send(candidate.toJSON()))
+        .then(candidate => { res.send(candidate.toJSON()) })
         .catch(e => res.status(400).send(e));
 });
 
