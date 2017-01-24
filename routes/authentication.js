@@ -50,29 +50,32 @@ router.post('/login', (req, res, next) => {
 router.post('/forgot-password', (req, res, next) => {
 
     // Find user with given email
-    User.findOne({ email : req.body.email }).then((user) => {
-        // User found
-        if(user) {
-            // Check last time user requested forgot-password
-            let now                  = time();
-            let requestePasswordAt   = user.requestPasswordAt ? user.requestPasswordAt.getTime() : time();
+    User
+        .findOne({ email : req.body.email })
+        .then((user) => {
+            // User found
+            if(user) {
+                // Check last time user requested forgot-password
+                let now                  = time();
+                let requestePasswordAt   = user.requestPasswordAt ? user.requestPasswordAt.getTime() : time();
 
-            // If forgot-password requested in the last 24 hours
-            if(now - requestePasswordAt <= (24 * 60 * 60)) {
-                res.send(400).send({ error : 'password_already_requested' });
+                // If forgot-password requested in the last 24 hours
+                if(now - requestePasswordAt <= (24 * 60 * 60)) {
+                    res.send(400).send({ error : 'password_already_requested' });
+                }
+                else {
+                    user.requestPasswordAt = new Date();
+                    user.token = crypto.randomBytes(32).toString('hex');
+                    return user.save();
+                }
             }
             else {
-                user.requestPasswordAt = new Date();
-                user.token = crypto.randomBytes(32).toString('hex');
-                return user.save();
+                res.status(400).send({ error : 'user_not_found' });
             }
-        }
-        else {
-            res.status(400).send({ error : 'user_not_found' });
-        }
-    })
+        })
         .then((user) => {
-            res.render('reset-password', { user : user }, (html, error) => {
+            let title = 'reset_password';
+            res.render('reset-password', { user, title }, (html, error) => {
                 if(error) res.status(400).send(error);
                 sendgrid.send(user.email, 'reset_password', html);
                 res.send(user.toJSON());
