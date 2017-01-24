@@ -36,7 +36,7 @@ Account.methods.isEnabled = function() {
     return !!this.enabledAt;
 };
 
-Account.methods.isActive = function() => {
+Account.methods.isActive = function() {
     return !this.isCancelled() && !isDisabled() && isEnabled() ? true : false;
 };
 

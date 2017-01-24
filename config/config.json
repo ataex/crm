@@ -1,0 +1,6 @@
+{
+  "SENDGRID_KEY" : "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",
+  "SECRET_KEY" : "thisisenexamplekey",
+  "STRIPE_SECRET_KEY" : "sk_test_8F0AwpAjEia0TXuSWzMESuYQ",
+  "STRIPE_PUBLIC_KEY" : "pk_test_oD6UssAF3ohVf9AU64gUTGdq"
+}

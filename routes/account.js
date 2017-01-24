@@ -1,7 +1,6 @@
 let express             = require('express');
 let router              = express.Router();
 let { ObjectID }        = require('mongodb');
-let config              = require('./../config/config.js');
 let _                   = require('lodash');
 let Subscription        = require('./../models/subscription');
 let Account             = require('./../models/account');

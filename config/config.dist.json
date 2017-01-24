@@ -1,0 +1,6 @@
+{
+  "SENDGRID_KEY" : "",
+  "SECRET_KEY" : "",
+  "STRIPE_SECRET_KEY" : "",
+  "STRIPE_PUBLIC_KEY" : ""
+}
