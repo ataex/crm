@@ -1,5 +1,6 @@
-const mongoose  = require('mongoose');
-const Schema    = mongoose.Schema;
+const mongoose      = require('mongoose');
+const Schema        = mongoose.Schema;
+const Subscription  = require('./subscription');
 
 let accountSchema = new Schema({
 
@@ -10,6 +11,10 @@ let accountSchema = new Schema({
     },
     stripe : {
         type : String
+    },
+    _subscription : {
+        type : Schema.ObjectId,
+        ref : 'Subscription'
     },
     cancelledAt : {
         type : Date,
@@ -39,6 +44,13 @@ accountSchema.methods.isEnabled = function() {
 
 accountSchema.methods.isActive = function() {
     return !!(!this.isCancelled() && !isDisabled() && isEnabled());
+};
+
+accountSchema.methods.getSubscription = function() {
+    Subscription
+        .findById(this._subscription._id)
+        .then(subsription => subscription)
+        .catch(e => e)
 };
 
 let Account = mongoose.model('Account', accountSchema);

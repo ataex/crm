@@ -11,50 +11,53 @@ let sendgrid            = require('./../services/sendgrid');
 // Create account and admin user
 router.post('/register', (req, res, next) => {
 
-    // Create account
-    let account         = new Account(req.body);
-    let accountSaved;
-    let subscriptionSaved;
+    let subscription = new Subscription();
 
-    account.save().then((account) => {
-        // Create subscription
-        let token           = crypto.randomBytes(32).toString('hex');
-        accountSaved        = account;
-        let subscription    = new Subscription({ token : token, _account : accountSaved._id });
+    subscription
+        .save()
+        .then(subscription => {
+            let account             = new Account(req.body);
+            account.token           = crypto.randomBytes(32).toString('hex');
+            account.subscription    = subscription._id;
 
-        return subscription.save();
-    })
-    .then((subscription) => {
-        subscriptionSaved = subscription;
-        // Create amin user
-        let user = new User({
-            type : 'owner',
-            _account : accountSaved._id,
-            firstname : req.body.firstname,
-            lastname : req.body.lastname,
-            email : req.body.email,
-            password : req.body.password
+            return account.save();
+        })
+        .then(account => {
+            // Create amin user
+            let user = new User({
+                type : 'owner',
+                _account : account._id,
+                firstname : req.body.firstname,
+                lastname : req.body.lastname,
+                email : req.body.email,
+                password : req.body.password
+            });
+
+            return user.save();
+        })
+        .then((user) => {
+            // Send email
+            let title           = 'activate_account';
+            let account         = user._account;
+            let subscription    = account._subscription;
+
+            res.render('activate', { account, subscription, user, title }, (error, html) => {
+                if(error) res.status(400).send(error);
+                sendgrid.send(user.email, 'activate_account', html);
+                res.send(user);
+            });
+        })
+        .catch((e) => {
+            console.log(e);
+            res.status(400).send(e)
         });
-
-        return user.save();
-    })
-    .then((user) => {
-        // Send email
-        let title = 'activate_account';
-        res.render('activate', { account : accountSaved, subscription : subscriptionSaved, user : user, title }, (error, html) => {
-            if(error) res.status(400).send(error);
-            sendgrid.send(user.email, 'activate_account', html);
-            res.send(user);
-        });
-    })
-    .catch((e) => res.status(400).send(e));
 });
 
 // Create account and admin user
 router.post('/activate/:token', (req, res, next) => {
 
     Subscription
-        .findOneAndUpdate({ token : req.params.token }, {  $set : { enabledAt : new Date } }, { new : true } ).populate('_account', '-token')
+        .findOneAndUpdate({ token : req.params.token }, {  $set : { enabledAt : new Date } }, { new : true } ).populate('_account')
         .then((subscription) => {
             res.send(subscription.toJSON());
         })
