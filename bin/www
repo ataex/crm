@@ -1,5 +1,16 @@
 #!/usr/bin/env node
 
+// Set environment variables
+let config  = require('./../config/config.json');
+let env     = process.env.NODE_ENV || 'dev';
+if(env == 'dev' || env == 'test') {
+
+    let envConfig = config[env];
+    Object.keys(config[env]).forEach((key) => {
+        process.env[key] = envConfig[key];
+    });
+}
+
 /**
  * Module dependencies.
  */
@@ -13,7 +24,7 @@ var socketIO    = require('socket.io');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT);
 app.set('port', port);
 
 /**

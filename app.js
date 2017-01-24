@@ -4,7 +4,6 @@ let favicon                 = require('serve-favicon');
 let logger                  = require('morgan');
 let cookieParser            = require('cookie-parser');
 let bodyParser              = require('body-parser');
-let mongoose                = require('./config/mongoose');
 let app                     = express();
 let authTokenMiddleware     = require('./middlewares/auth-token');
 let applicationMiddleware   = require('./middlewares/application');
@@ -34,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Set security middleware
 app.use(applicationMiddleware);
+let mongoose = require('./config/mongoose');
 app.use(authTokenMiddleware);
 
 // CORS and other header options

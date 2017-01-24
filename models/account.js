@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose  = require('mongoose');
+const Schema    = mongoose.Schema;
 
-let Account = mongoose.model('Account', {
+let accountSchema = new Schema({
 
     company : {
         type: String,
@@ -24,20 +25,22 @@ let Account = mongoose.model('Account', {
     }
 });
 
-Account.methods.isCancelled = function() {
+accountSchema.methods.isCancelled = function() {
     return !!this.cancelledAt;
 };
 
-Account.methods.isDisabled = function() {
+accountSchema.methods.isDisabled = function() {
     return !!this.disabledAt;
 };
 
-Account.methods.isEnabled = function() {
+accountSchema.methods.isEnabled = function() {
     return !!this.enabledAt;
 };
 
-Account.methods.isActive = function() {
-    return !this.isCancelled() && !isDisabled() && isEnabled() ? true : false;
+accountSchema.methods.isActive = function() {
+    return !!(!this.isCancelled() && !isDisabled() && isEnabled());
 };
+
+let Account = mongoose.model('Account', accountSchema);
 
 module.exports = Account;
