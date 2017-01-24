@@ -17,11 +17,6 @@ let subscriptionSchema = new Schema({
     },
     token : {
         type : String
-    },
-    _account : {
-        type : Schema.ObjectId,
-        ref : 'Account',
-        required : true
     }
 });
 

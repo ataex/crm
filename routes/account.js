@@ -12,17 +12,22 @@ let sendgrid            = require('./../services/sendgrid');
 router.post('/register', (req, res, next) => {
 
     let subscription = new Subscription();
+    let savedAccount;
+    let savedSubscription;
+    let savedUser;
 
     subscription
         .save()
         .then(subscription => {
+            let savedSubscription = subscription;
             let account             = new Account(req.body);
             account.token           = crypto.randomBytes(32).toString('hex');
-            account.subscription    = subscription._id;
+            account._subscription   = subscription._id;
 
             return account.save();
         })
         .then(account => {
+            savedAccount = account;
             // Create amin user
             let user = new User({
                 type : 'owner',
@@ -35,20 +40,20 @@ router.post('/register', (req, res, next) => {
 
             return user.save();
         })
-        .then((user) => {
+        .then(user => {
+            let savedUser = user;
             // Send email
             let title           = 'activate_account';
-            let account         = user._account;
-            let subscription    = account._subscription;
 
-            res.render('activate', { account, subscription, user, title }, (error, html) => {
-                if(error) res.status(400).send(error);
-                sendgrid.send(user.email, 'activate_account', html);
-                res.send(user);
+            res.render('email/activate', { account : savedAccount, subscription : savedSubscription, user, title }, (error, html) => {
+                if(error) return res.status(400).send(error);
+                return sendgrid.send(user.email, 'activate_account', html);
             });
         })
-        .catch((e) => {
-            console.log(e);
+        .then(response => {
+            res.send({});
+        })
+        .catch(e => {
             res.status(400).send(e)
         });
 });

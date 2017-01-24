@@ -1,6 +1,7 @@
 const mongoose  = require('mongoose');
 const Schema    = mongoose.Schema;
 const bcrypt    = require('bcryptjs');
+const Account   = require('./account');
 
 let userSchema = new Schema({
 
@@ -18,7 +19,7 @@ let userSchema = new Schema({
         type : String,
         required : true,
         trim : true,
-        unique : true
+        // unique : true
     },
     password : {
         type : String,
@@ -68,5 +69,14 @@ userSchema.pre('save', function(next) {
         next();
     }
 });
+
+userSchema.methods.getAccount = function() {
+    Account
+        .findById(this._account)
+        .then(account => {
+            return account;
+        })
+        .catch(e => e)
+};
 
 module.exports = mongoose.model('User', userSchema);

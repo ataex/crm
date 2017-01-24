@@ -48,11 +48,11 @@ accountSchema.methods.isActive = function() {
 
 accountSchema.methods.getSubscription = function() {
     Subscription
-        .findById(this._subscription._id)
-        .then(subsription => subscription)
+        .findById(this._subscription)
+        .then(subscription => {
+            return subscription;
+        })
         .catch(e => e)
 };
 
-let Account = mongoose.model('Account', accountSchema);
-
-module.exports = Account;
+module.exports = mongoose.model('Account', accountSchema);
