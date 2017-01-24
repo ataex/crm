@@ -1,6 +1,8 @@
 <form [formGroup]="registerForm" (submit)="onSubmit()">
 
-    <input type="text" formControlName="company" placeholder="Company">
+    <input type="text" formControlName="firstname" placeholder="Firstname">
+    <input type="text" formControlName="lastname" placeholder="Lastname">
+    <input type="text" formControlName="company" placeholder="Company name">
     <input type="text" formControlName="email" placeholder="Email">
     <input type="password" formControlName="password" placeholder="Password">
     <input type="password" formControlName="passwordRepeat" placeholder="Repeat password">

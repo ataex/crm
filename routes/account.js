@@ -31,6 +31,8 @@ router.post('/register', (req, res, next) => {
         let user = new User({
             type : 'owner',
             _account : accountSaved._id,
+            firstname : req.body.firstname,
+            lastname : req.body.lastname,
             email : req.body.email,
             password : req.body.password
         });

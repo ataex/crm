@@ -6,11 +6,13 @@ let userSchema = new Schema({
 
     firstname : {
         type: String,
-        trim : true
+        trim : true,
+        required : true
     },
     lastname : {
         type: String,
-        trim : true
+        trim : true,
+        required : true
     },
     email : {
         type : String,

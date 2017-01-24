@@ -22,18 +22,6 @@ let subscriptionSchema = new Schema({
         type : Schema.ObjectId,
         ref : 'Account',
         required : true
-    },
-    cancelledAt : {
-        type : Date,
-        default : null
-    },
-    disabledAt : {
-        type : Date,
-        default : null
-    },
-    enabledAt : {
-        type : Date,
-        default : null
     }
 });
 
