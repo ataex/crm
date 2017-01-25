@@ -11,15 +11,16 @@ let sendgrid            = require('./../services/sendgrid');
 // Create account and admin user
 router.post('/register', (req, res, next) => {
 
+    //@todo : Validate data before doing any registration to avoid orphan data in database
+
     let subscription = new Subscription();
     let savedAccount;
     let savedSubscription;
-    let savedUser;
 
     subscription
         .save()
         .then(subscription => {
-            let savedSubscription = subscription;
+            savedSubscription       = subscription;
             let account             = new Account(req.body);
             account.token           = crypto.randomBytes(32).toString('hex');
             account._subscription   = subscription._id;
@@ -28,7 +29,7 @@ router.post('/register', (req, res, next) => {
         })
         .then(account => {
             savedAccount = account;
-            // Create amin user
+            // Create owner user
             let user = new User({
                 type : 'owner',
                 _account : account._id,
@@ -41,9 +42,8 @@ router.post('/register', (req, res, next) => {
             return user.save();
         })
         .then(user => {
-            let savedUser = user;
             // Send email
-            let title           = 'activate_account';
+            let title = 'activate_account';
 
             res.render('email/activate', { account : savedAccount, subscription : savedSubscription, user, title }, (error, html) => {
                 if(error) return res.status(400).send(error);
@@ -51,9 +51,11 @@ router.post('/register', (req, res, next) => {
             });
         })
         .then(response => {
-            res.send({});
+            console.log(user);
+            // res.send(user);
         })
         .catch(e => {
+            console.log(e);
             res.status(400).send(e)
         });
 });
