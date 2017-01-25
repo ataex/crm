@@ -12,6 +12,7 @@ let userRoutes              = require('./routes/user');
 let candidateRoutes         = require('./routes/candidate');
 let authenticationRoutes    = require('./routes/authentication');
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
