@@ -12,23 +12,23 @@ let sendgrid            = require('./../services/sendgrid');
 router.post('/register', (req, res, next) => {
 
     //@todo : Validate data before doing any registration to avoid orphan data in database
+    //@todo : Use bluebird library and avoid global scope variables
 
     let subscription = new Subscription();
-    let savedAccount;
-    let savedSubscription;
+    let account;
+    let user;
 
     subscription
         .save()
-        .then(subscription => {
-            savedSubscription       = subscription;
+        .then(_subscription => {
             let account             = new Account(req.body);
             account.token           = crypto.randomBytes(32).toString('hex');
             account._subscription   = subscription._id;
 
             return account.save();
         })
-        .then(account => {
-            savedAccount = account;
+        .then(_account => {
+            account = _account;
             // Create owner user
             let user = new User({
                 type : 'owner',
@@ -41,21 +41,24 @@ router.post('/register', (req, res, next) => {
 
             return user.save();
         })
-        .then(user => {
+        .then(_user => {
             // Send email
-            let title = 'activate_account';
+            user        = _user;
+            let title   = 'activate_account';
 
-            res.render('email/activate', { account : savedAccount, subscription : savedSubscription, user, title }, (error, html) => {
-                if(error) return res.status(400).send(error);
-                return sendgrid.send(user.email, 'activate_account', html);
+            return new Promise((resolve, reject) => {
+                res.render('email/activate', { account, subscription, user, title }, (error, html) => {
+                    error ? reject(error) : resolve(html);
+                });
             });
         })
+        .then(html => {
+            return sendgrid.send(user.email, 'activate_account', html);
+        })
         .then(response => {
-            console.log(user);
-            // res.send(user);
+            res.send();
         })
         .catch(e => {
-            console.log(e);
             res.status(400).send(e)
         });
 });
